@@ -55,8 +55,8 @@ public class UserInfoProfile implements Serializable {
     private String viewer;
     @Column(name="opera_type", length=1024)
     private String operaType;
-    @Column(name="purhasing_opera_items", length=1024)
-    private String purhasingOperaItems;
+    @Column(name="purchasing_opera_items", length=1024)
+    private String purchasingOperaItems;
     @Column(name="community_attendance", length=255)
     private Boolean communityAttendance;
     @Column(length=1024)
@@ -84,7 +84,7 @@ public class UserInfoProfile implements Serializable {
     public UserInfoProfile(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
 			String education, String geoLocation, String languages, String employment, String frequenter,
 			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, String operaType,
-			String purhasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
+			String purchasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
 			Date dateInsert, Date dateModify, Boolean notificationRecieved, Date dateNotificationRecieved,
 			Date dateNotificationExperied, Set<Notification> notification) {
 		super();
@@ -103,7 +103,7 @@ public class UserInfoProfile implements Serializable {
 		this.eventFrequency = eventFrequency;
 		this.viewer = viewer;
 		this.operaType = operaType;
-		this.purhasingOperaItems = purhasingOperaItems;
+		this.purchasingOperaItems = purchasingOperaItems;
 		this.communityAttendance = communityAttendance;
 		this.hobby = hobby;
 		this.culturalInteresting = culturalInteresting;
@@ -391,8 +391,8 @@ public class UserInfoProfile implements Serializable {
      *
      * @return the current value of purhasingOperaItems
      */
-    public String getPurhasingOperaItems() {
-        return purhasingOperaItems;
+    public String getPurchasingOperaItems() {
+        return purchasingOperaItems;
     }
 
     /**
@@ -400,8 +400,8 @@ public class UserInfoProfile implements Serializable {
      *
      * @param aPurhasingOperaItems the new value for purhasingOperaItems
      */
-    public void setPurhasingOperaItems(String aPurhasingOperaItems) {
-        purhasingOperaItems = aPurhasingOperaItems;
+    public void setPurchasingOperaItems(String aPurchasingOperaItems) {
+    	purchasingOperaItems = aPurchasingOperaItems;
     }
 
     /**

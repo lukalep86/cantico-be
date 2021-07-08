@@ -25,7 +25,7 @@ public class UserInfoProfileDTO implements Serializable{
     private String eventFrequency;
     private String viewer;
     private String operaType;
-    private String purhasingOperaItems;
+    private String purchasingOperaItems;
     private Boolean communityAttendance;
     private String hobby;
     private String culturalInteresting;
@@ -44,7 +44,7 @@ public class UserInfoProfileDTO implements Serializable{
 	public UserInfoProfileDTO(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
 			String education, String geoLocation, String languages, String employment, String frequenter,
 			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, String operaType,
-			String purhasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
+			String purchasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
 			Date dateInsert, Date dateModify, Boolean notificationRecieved, Date dateNotificationRecieved,
 			Date dateNotificationExperied, Set<NotificationDTO> notification) {
 		super();
@@ -63,7 +63,7 @@ public class UserInfoProfileDTO implements Serializable{
 		this.eventFrequency = eventFrequency;
 		this.viewer = viewer;
 		this.operaType = operaType;
-		this.purhasingOperaItems = purhasingOperaItems;
+		this.purchasingOperaItems = purchasingOperaItems;
 		this.communityAttendance = communityAttendance;
 		this.hobby = hobby;
 		this.culturalInteresting = culturalInteresting;
@@ -195,12 +195,12 @@ public class UserInfoProfileDTO implements Serializable{
 		this.operaType = operaType;
 	}
 
-	public String getPurhasingOperaItems() {
-		return purhasingOperaItems;
+	public String getPurchasingOperaItems() {
+		return purchasingOperaItems;
 	}
 
-	public void setPurhasingOperaItems(String purhasingOperaItems) {
-		this.purhasingOperaItems = purhasingOperaItems;
+	public void setPurchasingOperaItems(String purchasingOperaItems) {
+		this.purchasingOperaItems = purchasingOperaItems;
 	}
 
 	public Boolean getCommunityAttendance() {
@@ -301,7 +301,7 @@ public class UserInfoProfileDTO implements Serializable{
 		result = prime * result + ((notification == null) ? 0 : notification.hashCode());
 		result = prime * result + ((notificationRecieved == null) ? 0 : notificationRecieved.hashCode());
 		result = prime * result + ((operaType == null) ? 0 : operaType.hashCode());
-		result = prime * result + ((purhasingOperaItems == null) ? 0 : purhasingOperaItems.hashCode());
+		result = prime * result + ((purchasingOperaItems == null) ? 0 : purchasingOperaItems.hashCode());
 		result = prime * result + ((reasonDeviceUse == null) ? 0 : reasonDeviceUse.hashCode());
 		result = prime * result + ((viewer == null) ? 0 : viewer.hashCode());
 		return result;
@@ -426,10 +426,10 @@ public class UserInfoProfileDTO implements Serializable{
 				return false;
 		} else if (!operaType.equals(other.operaType))
 			return false;
-		if (purhasingOperaItems == null) {
-			if (other.purhasingOperaItems != null)
+		if (purchasingOperaItems == null) {
+			if (other.purchasingOperaItems != null)
 				return false;
-		} else if (!purhasingOperaItems.equals(other.purhasingOperaItems))
+		} else if (!purchasingOperaItems.equals(other.purchasingOperaItems))
 			return false;
 		if (reasonDeviceUse == null) {
 			if (other.reasonDeviceUse != null)
@@ -477,8 +477,8 @@ public class UserInfoProfileDTO implements Serializable{
 		builder.append(viewer);
 		builder.append(", operaType=");
 		builder.append(operaType);
-		builder.append(", purhasingOperaItems=");
-		builder.append(purhasingOperaItems);
+		builder.append(", purchasingOperaItems=");
+		builder.append(purchasingOperaItems);
 		builder.append(", communityAttendance=");
 		builder.append(communityAttendance);
 		builder.append(", hobby=");
