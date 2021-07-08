@@ -3,7 +3,6 @@
 package com.cantico.profile.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,101 +11,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity(name="notification")
 public class Notification implements Serializable {
 
-    /** Primary key. */
-    protected static final String PK = "idNotification";
+	private static final long serialVersionUID = -271720270786665108L;
 
-    /**
-     * The optimistic lock. Available via standard bean get/set operations.
-     */
-    @Version
-    @Column(name="LOCK_FLAG")
-    private Integer lockFlag;
-
-    /**
-     * Access method for the lockFlag property.
-     *
-     * @return the current value of the lockFlag property
-     */
-    public Integer getLockFlag() {
-        return lockFlag;
-    }
-
-    /**
-     * Sets the value of the lockFlag property.
-     *
-     * @param aLockFlag the new value of the lockFlag property
-     */
-    public void setLockFlag(Integer aLockFlag) {
-        lockFlag = aLockFlag;
-    }
+	/** Primary key. */
+    protected static final String PK = "idNotificationType";
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_notification", unique=true, nullable=false, precision=19)
-    private long idNotification;
-    @Column(name="id_user_profile", nullable=false, precision=19)
-    private long idUserProfile;
-    @Column(name="id_notification_type", nullable=false, precision=10)
-    private int idNotificationType;
-    @Column(name="date_insert", nullable=false)
-    private LocalDateTime dateInsert;
-    @Column(name="date_modify")
-    private LocalDateTime dateModify;
-    @Column(nullable=false, precision=3)
-    private short enable;
+    @Column(name="id_notification_type", unique=true, nullable=false, precision=10)
+    private Integer idNotificationType;
+    @Column(nullable=false, length=255)
+    private String description;
+    @Column(length=1)
+    private Boolean enabled;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="id_user_info_profile", nullable=false)
+    private UserInfoProfile userInfoProfile;
 
     /** Default constructor. */
     public Notification() {
         super();
     }
 
-    /**
-     * Access method for idNotification.
-     *
-     * @return the current value of idNotification
-     */
-    public long getIdNotification() {
-        return idNotification;
-    }
+    
+    public Notification(Integer idNotificationType, String description, Boolean enabled,
+			UserInfoProfile userInfoProfile) {
+		super();
+		this.idNotificationType = idNotificationType;
+		this.description = description;
+		this.enabled = enabled;
+		this.userInfoProfile = userInfoProfile;
+	}
 
-    /**
-     * Setter method for idNotification.
-     *
-     * @param aIdNotification the new value for idNotification
-     */
-    public void setIdNotification(long aIdNotification) {
-        idNotification = aIdNotification;
-    }
 
-    /**
-     * Access method for idUserProfile.
-     *
-     * @return the current value of idUserProfile
-     */
-    public long getIdUserProfile() {
-        return idUserProfile;
-    }
-
-    /**
-     * Setter method for idUserProfile.
-     *
-     * @param aIdUserProfile the new value for idUserProfile
-     */
-    public void setIdUserProfile(long aIdUserProfile) {
-        idUserProfile = aIdUserProfile;
-    }
-
-    /**
+	/**
      * Access method for idNotificationType.
      *
      * @return the current value of idNotificationType
      */
-    public int getIdNotificationType() {
+    public Integer getIdNotificationType() {
         return idNotificationType;
     }
 
@@ -115,62 +64,62 @@ public class Notification implements Serializable {
      *
      * @param aIdNotificationType the new value for idNotificationType
      */
-    public void setIdNotificationType(int aIdNotificationType) {
+    public void setIdNotificationType(Integer aIdNotificationType) {
         idNotificationType = aIdNotificationType;
     }
 
     /**
-     * Access method for dateInsert.
+     * Access method for description.
      *
-     * @return the current value of dateInsert
+     * @return the current value of description
      */
-    public LocalDateTime getDateInsert() {
-        return dateInsert;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * Setter method for dateInsert.
+     * Setter method for description.
      *
-     * @param aDateInsert the new value for dateInsert
+     * @param aDescription the new value for description
      */
-    public void setDateInsert(LocalDateTime aDateInsert) {
-        dateInsert = aDateInsert;
+    public void setDescription(String aDescription) {
+        description = aDescription;
     }
 
     /**
-     * Access method for dateModify.
+     * Access method for enabled.
      *
-     * @return the current value of dateModify
+     * @return true if and only if enabled is currently true
      */
-    public LocalDateTime getDateModify() {
-        return dateModify;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
     /**
-     * Setter method for dateModify.
+     * Setter method for enabled.
      *
-     * @param aDateModify the new value for dateModify
+     * @param aEnabled the new value for enabled
      */
-    public void setDateModify(LocalDateTime aDateModify) {
-        dateModify = aDateModify;
+    public void setEnabled(Boolean aEnabled) {
+        enabled = aEnabled;
     }
 
     /**
-     * Access method for enable.
+     * Access method for userInfoProfile.
      *
-     * @return the current value of enable
+     * @return the current value of userInfoProfile
      */
-    public short getEnable() {
-        return enable;
+    public UserInfoProfile getUserInfoProfile() {
+        return userInfoProfile;
     }
 
     /**
-     * Setter method for enable.
+     * Setter method for userInfoProfile.
      *
-     * @param aEnable the new value for enable
+     * @param aUserInfoProfile the new value for userInfoProfile
      */
-    public void setEnable(short aEnable) {
-        enable = aEnable;
+    public void setUserInfoProfile(UserInfoProfile aUserInfoProfile) {
+        userInfoProfile = aUserInfoProfile;
     }
 
     /**
@@ -187,7 +136,7 @@ public class Notification implements Serializable {
             return false;
         }
         Notification that = (Notification) other;
-        if (this.getIdNotification() != that.getIdNotification()) {
+        if (this.getIdNotificationType() != that.getIdNotificationType()) {
             return false;
         }
         return true;
@@ -214,7 +163,7 @@ public class Notification implements Serializable {
     public int hashCode() {
         int i;
         int result = 17;
-        i = (int)(getIdNotification() ^ (getIdNotification()>>>32));
+        i = getIdNotificationType();
         result = 37*result + i;
         return result;
     }
@@ -227,7 +176,7 @@ public class Notification implements Serializable {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("[Notification |");
-        sb.append(" idNotification=").append(getIdNotification());
+        sb.append(" idNotificationType=").append(getIdNotificationType());
         sb.append("]");
         return sb.toString();
     }
@@ -239,7 +188,7 @@ public class Notification implements Serializable {
      */
     public Map<String, Object> getPrimaryKey() {
         Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idNotification", Long.valueOf(getIdNotification()));
+        ret.put("idNotificationType", Integer.valueOf(getIdNotificationType()));
         return ret;
     }
 

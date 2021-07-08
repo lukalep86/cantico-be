@@ -1,19 +1,27 @@
-CREATE TABLE user_profile (
-	id_user_profile BIGINT auto_increment NOT NULL,
+CREATE TABLE user_info_profile (
+	id_user_info_profile BIGINT auto_increment NOT NULL,
 	id_user BIGINT NOT NULL,
-	gender VARCHAR(25) NOT NULL,
-	marital_status varchar(45) NOT NULL,
-	education varchar(255) NOT NULL,
-	geo_location varchar(255) NOT NULL,
-	languages varchar(1024) NOT NULL,
-	employment varchar(255) NOT NULL,
-	event_frequency varchar(100) NOT NULL,
-	device_use TINYINT DEFAULT false NOT NULL,
-	reason_device_use varchar(500) NULL,
-	date_insert DATETIME NOT NULL,
+	gender VARCHAR(25) NULL,
+	age INT NULL,
+	marital_status varchar(45) NULL,
+	education varchar(255) NULL,
+	geo_location varchar(255)  NULL,
+	languages varchar(1024)  NULL,
+	employment varchar(255)  NULL,
+	frequenter varchar(100)  NULL,
+	device_use BIT(1) DEFAULT false  NULL,
+	reason_device_use varchar(255) NULL,
+	event_frequency varchar(255)  NULL,
+	viewer varchar(255)  NULL,
+	opera_type varchar(1024) NULL,
+	purhasing_opera_items varchar(1024) NULL,
+	community_attendance varchar(255)  NULL,
+	hobby varchar(1024) NULL,
+	cultural_interesting varchar(500) NULL,
+	date_insert DATETIME  NULL,
 	date_modify DATETIME NULL,
-	notification_recieved TINYINT DEFAULT false NOT NULL,
-	date_recieved DATETIME NOT NULL,
+	notification_recieved BIT(1) DEFAULT false  NULL,
+	date_notification_recieved DATETIME  NULL,
 	date_notification_experied DATETIME NULL,
 	CONSTRAINT user_profile_pk PRIMARY KEY (id_user_profile)
 )
@@ -22,75 +30,15 @@ DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci;
 
 
-CREATE TABLE info_user_profile (
-	id_info_user_profile BIGINT auto_increment NOT NULL,
-	id_user_profile BIGINT NOT NULL,
-	id_event_frequency INT NOT NULL,
-	id_viewer INT NOT NULL,
-	opera_type varchar(1024) NULL,
-	purhasing_opera_items varchar(1024) NULL,
-	id_meet_platform INT NOT NULL,
-	hobby varchar(1024) NULL,
-	date_insert DATETIME NOT NULL,
-	date_modify DATETIME NULL,
-	CONSTRAINT info_user_profile_pk PRIMARY KEY (id_info_user_profile)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8
-COLLATE=utf8_general_ci;
-
-
 CREATE TABLE notification_type (
-	id_notification_type BIGINT NOT NULL,
-	name varchar(100) NOT NULL,
+	id_notification_type INT auto_increment NOT NULL,
+	id_user_info_profile BIGINT NOT NULL,
 	description varchar(255) NOT NULL,
+	enabled BIT(1) DEFAULT false NULL,
 	CONSTRAINT notification_type_pk PRIMARY KEY (id_notification_type)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci;
 
-CREATE TABLE notification (
-	id_notification BIGINT auto_increment NOT NULL,
-	id_user_profile BIGINT NOT NULL,
-	id_notification_type INT NOT NULL,
-	date_insert DATETIME NOT NULL,
-	date_modify DATETIME NULL,
-	enable TINYINT DEFAULT false NOT NULL,
-	CONSTRAINT notification_pk PRIMARY KEY (id_notification)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8
-COLLATE=utf8_general_ci;
-
-CREATE TABLE event_frequency (
-	id_event_frequency INT NOT NULL,
-	name varchar(100) NOT NULL,
-	description varchar(255) NOT NULL,
-	CONSTRAINT event_frequency_pk PRIMARY KEY (id_event_frequency)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8
-COLLATE=utf8_general_ci;
-
-
-CREATE TABLE viewer (
-	id_viewer INT NOT NULL,
-	name varchar(100) NOT NULL,
-	description varchar(255) NOT NULL,
-	CONSTRAINT viewer_pk PRIMARY KEY (id_viewer)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8
-COLLATE=utf8_general_ci;
-
-
-CREATE TABLE meet_platform (
-	id_meet_platform INT NOT NULL,
-	name varchar(100) NOT NULL,
-	description varchar(255) NOT NULL,
-	CONSTRAINT meet_platform_pk PRIMARY KEY (id_meet_platform)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8
-COLLATE=utf8_general_ci;
+ALTER TABLE notification ADD CONSTRAINT notification_fk FOREIGN KEY (id_user_info_profile) REFERENCES user_info_profile(id_user_info_profile);
