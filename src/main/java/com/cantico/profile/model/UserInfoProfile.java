@@ -58,7 +58,7 @@ public class UserInfoProfile implements Serializable {
     @Column(name="purhasing_opera_items", length=1024)
     private String purhasingOperaItems;
     @Column(name="community_attendance", length=255)
-    private String communityAttendance;
+    private Boolean communityAttendance;
     @Column(length=1024)
     private String hobby;
     @Column(name="cultural_interesting", length=500)
@@ -84,7 +84,7 @@ public class UserInfoProfile implements Serializable {
     public UserInfoProfile(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
 			String education, String geoLocation, String languages, String employment, String frequenter,
 			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, String operaType,
-			String purhasingOperaItems, String communityAttendance, String hobby, String culturalInteresting,
+			String purhasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
 			Date dateInsert, Date dateModify, Boolean notificationRecieved, Date dateNotificationRecieved,
 			Date dateNotificationExperied, Set<Notification> notification) {
 		super();
@@ -409,7 +409,7 @@ public class UserInfoProfile implements Serializable {
      *
      * @return the current value of communityAttendance
      */
-    public String getCommunityAttendance() {
+    public Boolean getCommunityAttendance() {
         return communityAttendance;
     }
 
@@ -418,7 +418,7 @@ public class UserInfoProfile implements Serializable {
      *
      * @param aCommunityAttendance the new value for communityAttendance
      */
-    public void setCommunityAttendance(String aCommunityAttendance) {
+    public void setCommunityAttendance(Boolean aCommunityAttendance) {
         communityAttendance = aCommunityAttendance;
     }
 

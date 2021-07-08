@@ -26,7 +26,7 @@ public class UserInfoProfileDTO implements Serializable{
     private String viewer;
     private String operaType;
     private String purhasingOperaItems;
-    private String communityAttendance;
+    private Boolean communityAttendance;
     private String hobby;
     private String culturalInteresting;
     private Date dateInsert;
@@ -44,7 +44,7 @@ public class UserInfoProfileDTO implements Serializable{
 	public UserInfoProfileDTO(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
 			String education, String geoLocation, String languages, String employment, String frequenter,
 			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, String operaType,
-			String purhasingOperaItems, String communityAttendance, String hobby, String culturalInteresting,
+			String purhasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
 			Date dateInsert, Date dateModify, Boolean notificationRecieved, Date dateNotificationRecieved,
 			Date dateNotificationExperied, Set<NotificationDTO> notification) {
 		super();
@@ -203,11 +203,11 @@ public class UserInfoProfileDTO implements Serializable{
 		this.purhasingOperaItems = purhasingOperaItems;
 	}
 
-	public String getCommunityAttendance() {
+	public Boolean getCommunityAttendance() {
 		return communityAttendance;
 	}
 
-	public void setCommunityAttendance(String communityAttendance) {
+	public void setCommunityAttendance(Boolean communityAttendance) {
 		this.communityAttendance = communityAttendance;
 	}
 

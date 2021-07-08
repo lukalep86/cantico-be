@@ -15,7 +15,7 @@ CREATE TABLE user_info_profile (
 	viewer varchar(255)  NULL,
 	opera_type varchar(1024) NULL,
 	purhasing_opera_items varchar(1024) NULL,
-	community_attendance varchar(255)  NULL,
+	community_attendance BIT(1)  NULL,
 	hobby varchar(1024) NULL,
 	cultural_interesting varchar(500) NULL,
 	date_insert DATETIME  NULL,
