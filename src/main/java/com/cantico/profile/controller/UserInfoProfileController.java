@@ -26,7 +26,7 @@ public class UserInfoProfileController {
 	UserInfoProfileService userInfoProfileService;
 	
 	@PreAuthorize("isAuthenticated()")
-	@PutMapping("/")
+	@PutMapping("/profile")
 	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(@RequestBody UserInfoProfileDTO userInfoProfileDTO){
 		
 		UserInfoProfileDTO userInfoProfile = userInfoProfileService.createUpdateUserInfoProfile(userInfoProfileDTO, 0);
