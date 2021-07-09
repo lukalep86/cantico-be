@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import com.cantico.profile.model.Notification;
-
 public class UserInfoProfileDTO implements Serializable{
 
 	private static final long serialVersionUID = 2701329992587393144L;

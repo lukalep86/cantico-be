@@ -30,8 +30,8 @@ DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci;
 
 
-CREATE TABLE notification_type (
-	id_notification_type INT auto_increment NOT NULL,
+CREATE TABLE notification (
+	id_notification INT auto_increment NOT NULL,
 	id_user_info_profile BIGINT NOT NULL,
 	description varchar(255) NOT NULL,
 	enabled BIT(1) DEFAULT false NULL,

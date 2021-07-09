@@ -3,8 +3,6 @@
 package com.cantico.profile.model;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,12 +17,9 @@ public class Notification implements Serializable {
 
 	private static final long serialVersionUID = -271720270786665108L;
 
-	/** Primary key. */
-    protected static final String PK = "idNotificationType";
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_notification_type", unique=true, nullable=false, precision=10)
+    @Column(name="id_notification_type", unique=true, nullable=false)
     private Integer idNotificationType;
     @Column(nullable=false, length=255)
     private String description;
@@ -34,12 +29,10 @@ public class Notification implements Serializable {
     @JoinColumn(name="id_user_info_profile", nullable=false)
     private UserInfoProfile userInfoProfile;
 
-    /** Default constructor. */
     public Notification() {
         super();
     }
 
-    
     public Notification(Integer idNotificationType, String description, Boolean enabled,
 			UserInfoProfile userInfoProfile) {
 		super();
@@ -49,85 +42,38 @@ public class Notification implements Serializable {
 		this.userInfoProfile = userInfoProfile;
 	}
 
-
-	/**
-     * Access method for idNotificationType.
-     *
-     * @return the current value of idNotificationType
-     */
     public Integer getIdNotificationType() {
         return idNotificationType;
     }
 
-    /**
-     * Setter method for idNotificationType.
-     *
-     * @param aIdNotificationType the new value for idNotificationType
-     */
     public void setIdNotificationType(Integer aIdNotificationType) {
         idNotificationType = aIdNotificationType;
     }
 
-    /**
-     * Access method for description.
-     *
-     * @return the current value of description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Setter method for description.
-     *
-     * @param aDescription the new value for description
-     */
     public void setDescription(String aDescription) {
         description = aDescription;
     }
 
-    /**
-     * Access method for enabled.
-     *
-     * @return true if and only if enabled is currently true
-     */
     public Boolean getEnabled() {
         return enabled;
     }
 
-    /**
-     * Setter method for enabled.
-     *
-     * @param aEnabled the new value for enabled
-     */
     public void setEnabled(Boolean aEnabled) {
         enabled = aEnabled;
     }
 
-    /**
-     * Access method for userInfoProfile.
-     *
-     * @return the current value of userInfoProfile
-     */
     public UserInfoProfile getUserInfoProfile() {
         return userInfoProfile;
     }
 
-    /**
-     * Setter method for userInfoProfile.
-     *
-     * @param aUserInfoProfile the new value for userInfoProfile
-     */
     public void setUserInfoProfile(UserInfoProfile aUserInfoProfile) {
         userInfoProfile = aUserInfoProfile;
     }
 
-    /**
-     * Compares the key for this instance with another Notification.
-     *
-     * @param other The object to compare to
-     * @return True if other object is instance of class Notification and the key objects are equal
-     */
     private boolean equalKeys(Object other) {
         if (this==other) {
             return true;
@@ -142,23 +88,12 @@ public class Notification implements Serializable {
         return true;
     }
 
-    /**
-     * Compares this instance with another Notification.
-     *
-     * @param other The object to compare to
-     * @return True if the objects are the same
-     */
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Notification)) return false;
         return this.equalKeys(other) && ((Notification)other).equalKeys(this);
     }
 
-    /**
-     * Returns a hash code for this instance.
-     *
-     * @return Hash code
-     */
     @Override
     public int hashCode() {
         int i;
@@ -168,28 +103,12 @@ public class Notification implements Serializable {
         return result;
     }
 
-    /**
-     * Returns a debug-friendly String representation of this instance.
-     *
-     * @return String representation of this instance
-     */
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("[Notification |");
         sb.append(" idNotificationType=").append(getIdNotificationType());
         sb.append("]");
         return sb.toString();
-    }
-
-    /**
-     * Return all elements of the primary key.
-     *
-     * @return Map of key names to values
-     */
-    public Map<String, Object> getPrimaryKey() {
-        Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("idNotificationType", Integer.valueOf(getIdNotificationType()));
-        return ret;
     }
 
 }

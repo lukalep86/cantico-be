@@ -12,8 +12,11 @@ import org.springframework.stereotype.Component;
 import com.cantico.profile.dto.NotificationDTO;
 import com.cantico.profile.dto.UserInfoProfileDTO;
 import com.cantico.profile.dto.mapper.UserInfoProfileMapper;
+import com.cantico.profile.exception.ResourceNotFoundException;
+import com.cantico.profile.model.Anagrafica;
 import com.cantico.profile.model.Notification;
 import com.cantico.profile.model.UserInfoProfile;
+import com.cantico.profile.repository.AnagraficaRepository;
 import com.cantico.profile.repository.NotificationRepository;
 import com.cantico.profile.repository.UserInfoProfileRepository;
 import com.cantico.profile.service.UserInfoProfileService;
@@ -26,9 +29,17 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 	
 	@Autowired
 	NotificationRepository notificationRepository;
+	
+	@Autowired
+	AnagraficaRepository anagraficaRepository;
 
 	@Override
 	public UserInfoProfileDTO createUpdateUserInfoProfile(UserInfoProfileDTO userInfoProfileDTO, long idUser) {
+		
+		Optional<Anagrafica> anagrafica = anagraficaRepository.findById(idUser);
+		if(!anagrafica.isPresent()) {
+			throw new ResourceNotFoundException("No User Found with id: " + idUser);
+		}
 		
 		Optional<UserInfoProfile> userInfoProfileDb = userInfoProfileRepository.findById(userInfoProfileDTO.getIdUserInfoProfile());
 		
@@ -57,6 +68,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 			
 		}else {
 			UserInfoProfile newUserInfoProfile = UserInfoProfileMapper.toUserInfoProfile(userInfoProfileDTO);
+			newUserInfoProfile.setUserAnagrafica(anagrafica.get());
 			userInfoProfileRepository.save(newUserInfoProfile);
 			
 			if(!userInfoProfileDTO.getNotification().isEmpty()) {

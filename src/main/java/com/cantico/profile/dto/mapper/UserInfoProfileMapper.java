@@ -32,7 +32,7 @@ public class UserInfoProfileMapper {
 		userInfoProfileDTO.setGeoLocation(userInfoProfile.getGeoLocation());
 		userInfoProfileDTO.setLanguages(userInfoProfile.getLanguages());
 		userInfoProfileDTO.setHobby(userInfoProfile.getHobby());
-		userInfoProfileDTO.setIdUser(userInfoProfile.getIdUser());
+		userInfoProfileDTO.setIdUser(userInfoProfile.getUserAnagrafica().getId());
 		userInfoProfileDTO.setMaritalStatus(userInfoProfile.getMaritalStatus());
 		userInfoProfileDTO.setNotificationRecieved(userInfoProfile.getNotificationRecieved());
 		userInfoProfileDTO.setOperaType(userInfoProfile.getOperaType());
@@ -81,7 +81,6 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setGeoLocation(userInfoProfileDTO.getGeoLocation());
 		userInfoProfile.setLanguages(userInfoProfileDTO.getLanguages());
 		userInfoProfile.setHobby(userInfoProfileDTO.getHobby());
-		userInfoProfile.setIdUser(userInfoProfileDTO.getIdUser());
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
 		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
 		userInfoProfile.setOperaType(userInfoProfileDTO.getOperaType());
@@ -114,7 +113,6 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setGeoLocation(userInfoProfileDTO.getGeoLocation());
 		userInfoProfile.setLanguages(userInfoProfileDTO.getLanguages());
 		userInfoProfile.setHobby(userInfoProfileDTO.getHobby());
-		userInfoProfile.setIdUser(userInfoProfileDTO.getIdUser());
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
 		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
 		userInfoProfile.setOperaType(userInfoProfileDTO.getOperaType());
