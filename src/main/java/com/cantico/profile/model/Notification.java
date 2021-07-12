@@ -21,10 +21,13 @@ public class Notification implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_notification_type", unique=true, nullable=false)
     private Integer idNotificationType;
+    
     @Column(nullable=false, length=255)
     private String description;
+    
     @Column(length=1)
     private Boolean enabled;
+    
     @ManyToOne(optional=false)
     @JoinColumn(name="id_user_info_profile", nullable=false)
     private UserInfoProfile userInfoProfile;
@@ -72,43 +75,6 @@ public class Notification implements Serializable {
 
     public void setUserInfoProfile(UserInfoProfile aUserInfoProfile) {
         userInfoProfile = aUserInfoProfile;
-    }
-
-    private boolean equalKeys(Object other) {
-        if (this==other) {
-            return true;
-        }
-        if (!(other instanceof Notification)) {
-            return false;
-        }
-        Notification that = (Notification) other;
-        if (this.getIdNotificationType() != that.getIdNotificationType()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof Notification)) return false;
-        return this.equalKeys(other) && ((Notification)other).equalKeys(this);
-    }
-
-    @Override
-    public int hashCode() {
-        int i;
-        int result = 17;
-        i = getIdNotificationType();
-        result = 37*result + i;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer("[Notification |");
-        sb.append(" idNotificationType=").append(getIdNotificationType());
-        sb.append("]");
-        return sb.toString();
     }
 
 }

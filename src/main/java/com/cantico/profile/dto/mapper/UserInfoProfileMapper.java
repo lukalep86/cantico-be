@@ -39,7 +39,7 @@ public class UserInfoProfileMapper {
 		userInfoProfileDTO.setPurchasingOperaItems(userInfoProfile.getPurchasingOperaItems());
 		userInfoProfileDTO.setReasonDeviceUse(userInfoProfile.getReasonDeviceUse());
 		userInfoProfileDTO.setViewer(userInfoProfile.getViewer());
-		userInfoProfileDTO.setDateModify(new Date());
+		userInfoProfileDTO.setDateInsert(userInfoProfile.getDateInsert());
 		userInfoProfileDTO.setDateNotificationExperied(userInfoProfile.getDateNotificationExperied());
 		userInfoProfileDTO.setDateNotificationRecieved(userInfoProfile.getDateNotificationRecieved());
 		
@@ -87,7 +87,8 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setPurchasingOperaItems(userInfoProfileDTO.getPurchasingOperaItems());
 		userInfoProfile.setReasonDeviceUse(userInfoProfileDTO.getReasonDeviceUse());
 		userInfoProfile.setViewer(userInfoProfileDTO.getViewer());
-		userInfoProfile.setDateModify(new Date());
+		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
+		userInfoProfile.setDateModify(userInfoProfileDTO.getDateModify());
 		userInfoProfile.setDateNotificationExperied(userInfoProfileDTO.getDateNotificationExperied());
 		userInfoProfile.setDateNotificationRecieved(userInfoProfileDTO.getDateNotificationRecieved());
 		
@@ -119,7 +120,8 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setPurchasingOperaItems(userInfoProfileDTO.getPurchasingOperaItems());
 		userInfoProfile.setReasonDeviceUse(userInfoProfileDTO.getReasonDeviceUse());
 		userInfoProfile.setViewer(userInfoProfileDTO.getViewer());
-		userInfoProfile.setDateModify(new Date());
+		userInfoProfile.setViewer(userInfoProfileDTO.getViewer());
+		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
 		userInfoProfile.setDateNotificationExperied(userInfoProfileDTO.getDateNotificationExperied());
 		userInfoProfile.setDateNotificationRecieved(userInfoProfileDTO.getDateNotificationRecieved());
 		

@@ -127,12 +127,12 @@ public class AnagraficaController  {
 		
 	}
 
-/*	@GetMapping("login/{email}/{password}")
+	@GetMapping("login/{email}/{password}")
 	public ResponseEntity<ServiceStatus> login(@PathVariable("email")  @Valid String email, @PathVariable("password") String password){
 		logger.warn("[GET / LOGIN] verifica login dell'Anagrafica con " + email);
 		service.checkLoginPassword(email, password);
 		return new ResponseEntity<ServiceStatus>(ServiceStatus.LOGIN_SUCCESS, HttpStatus.ACCEPTED);
-	}*/
+	}
 
 	@PutMapping("OTP/{email}")
 	@ApiOperation(value = "Create OTP", notes = "This method creates a new OTP")
