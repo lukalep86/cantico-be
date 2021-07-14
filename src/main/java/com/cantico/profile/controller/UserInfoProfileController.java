@@ -93,13 +93,17 @@ public class UserInfoProfileController {
 	}
 	
 	@GetMapping("/{email}")
-	public ResponseEntity<UserInfoProfileDTO> getUserInfoProfileList(@RequestParam("email") String email/*,
+	public ResponseEntity<UserInfoProfileDTO> getUserInfoProfileList(@PathVariable("email") String email/*,
 	@RequestHeader(required = false, name = "authorization") String jwt*/){
 		
-		/*String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
-		Anagrafica authUser = anagraficaService.findByEmail(email);*/
-		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
+		/*
+		 * JWT jsonExtract
+		 * String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
+			Anagrafica authUser = anagraficaService.findByEmail(email);*/
+		
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
+		//Use feign-client
+		/*ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		try {
 			anagraficaResponse = anagraficaClient.findAnagrafica(email);
 			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
@@ -117,8 +121,10 @@ public class UserInfoProfileController {
 					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
 			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
 
-		}
+		}*/
 		
+		
+		userInfoProfile = userInfoProfileService.getUserInfoProfileByEmail(email);
 		return new ResponseEntity<UserInfoProfileDTO>(userInfoProfile, HttpStatus.OK);
 		
 	}

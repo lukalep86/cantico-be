@@ -19,6 +19,7 @@ public interface UserInfoProfileService {
 	List<UserInfoProfileDTO> getUserInfoProfileList();
 	
 	UserInfoProfileDTO getUserInfoProfileByUserAnagrafica(AnagraficaClientCustom anagraficaClient);
+	UserInfoProfileDTO getUserInfoProfileByEmail(String email);
 	
 	List<UserInfoProfileDTO> getUserFilterByAdmin(UserInfoProfileCustomFilter userInfoProfileCustomFilter);
 

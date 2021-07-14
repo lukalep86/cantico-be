@@ -78,9 +78,10 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		
 		Set<Notification> notificationList = new HashSet<>();
 		
-		Long idAnagrafica = null;
-		
-		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
+		//METHOD to use feign-client
+		/*
+		 *Long idAnagrafica = null;
+		 * ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		try {
 			anagraficaResponse = anagraficaClient.findAnagrafica(userInfoProfileDTO.getEmail());
 			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
@@ -103,7 +104,15 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		Optional<Anagrafica> anagrafica = anagraficaRepository.findById(idAnagrafica);
 		if(!anagrafica.isPresent()) {
 			throw new ResourceNotFoundException("No User Found with id: " + idAnagrafica);
+		}*/
+		
+		
+		//------------------------------------METHOD WITHOUT FEIGN-CLIENT----------------------------------------
+		Anagrafica anagrafica = anagraficaRepository.findByEmail(userInfoProfileDTO.getEmail());
+		if(anagrafica == null) {
+			throw new ResourceNotFoundException("No User Found with email: " + userInfoProfileDTO.getEmail());
 		}
+		//-------------------------------------------------------------------------------------------------------------
 		
 		if(userInfoProfileDTO.getIdUserInfoProfile() != null) {
 			Optional<UserInfoProfile> userInfoProfileDb = userInfoProfileRepository.findById(userInfoProfileDTO.getIdUserInfoProfile());
@@ -141,7 +150,8 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		}else {
 			UserInfoProfile newUserInfoProfile = UserInfoProfileMapper.toUserInfoProfile(userInfoProfileDTO);
 			newUserInfoProfile.setDateInsert(new Date());
-			newUserInfoProfile.setUserAnagrafica(anagrafica.get());
+			//newUserInfoProfile.setUserAnagrafica(anagrafica.get());
+			newUserInfoProfile.setUserAnagrafica(anagrafica);
 			userInfoProfileRepository.save(newUserInfoProfile);
 			
 			if(userInfoProfileDTO.getNotifications() != null || !userInfoProfileDTO.getNotifications().isEmpty()) {
@@ -178,7 +188,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 	@Override
 	public UserInfoProfileDTO getUserInfoProfileByUserAnagrafica(AnagraficaClientCustom anagraficaClient) {
 		
-		UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagraficaWhereId(anagraficaClient.getId());
+		/*UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagraficaWhereId(anagraficaClient.getId());
 		UserInfoProfileDTO userInfoProfileDTO = new UserInfoProfileDTO();
 		
 		if(userInfoProfile != null) {
@@ -186,8 +196,8 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 			userInfoProfileDTO.setEmail(anagraficaClient.getEmail());
 			
 		}
-		
-		return userInfoProfileDTO;
+		*/
+		return null; // userInfoProfileDTO;
 	}
 
 	@Override
@@ -277,6 +287,24 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		}
 		
 		return sendCustomNotification;
+	}
+
+	@Override
+	public UserInfoProfileDTO getUserInfoProfileByEmail(String email) {
+		
+		Anagrafica anagrafica = anagraficaRepository.findByEmail(email);
+		UserInfoProfileDTO userInfoProfileDTO = new UserInfoProfileDTO();
+		
+		if(anagrafica != null) {
+			UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagrafica(anagrafica);		
+			if(userInfoProfile != null) {
+				userInfoProfileDTO = UserInfoProfileMapper.toUserInfoProfileDTO(userInfoProfile);
+				userInfoProfileDTO.setEmail(anagrafica.getEmail());
+				
+			}
+		}
+		
+		return userInfoProfileDTO;
 	}
 
 }

@@ -9,7 +9,7 @@ public class StringConcatByArray {
 	
 	public static String concatByArray(List<String> items) {
 		
-		StringBuilder concat = null;
+		StringBuilder concat = new StringBuilder();
 		
 		if(!items.isEmpty()) {
 			for(String item : items) {

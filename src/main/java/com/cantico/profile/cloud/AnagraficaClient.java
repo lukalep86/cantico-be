@@ -11,7 +11,7 @@ import com.cantico.profile.cloud.impl.AnagraficaClientCustom;
 
 import io.swagger.annotations.ApiOperation;
 
-@FeignClient(name = "canticoIDM", url = "{canticoIdm.url}", decode404 = true)
+@FeignClient(name = "canticoIDM", url ="${canticoIdm.url}", decode404 = true)
 public interface AnagraficaClient {
 	
 	@GetMapping(value = "/{email}")
