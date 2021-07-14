@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cantico.profile.Enum.ServiceStatus;
 import com.cantico.profile.exception.InvalidTokenException;
+import com.cantico.profile.exception.MailAuthenticationException;
 import com.cantico.profile.model.Anagrafica;
 import com.cantico.profile.model.DettagliTecnici;
 import com.cantico.profile.service.AnagraficaService;
@@ -127,12 +127,12 @@ public class AnagraficaController  {
 		
 	}
 
-	@GetMapping("login/{email}/{password}")
+/*	@GetMapping("login/{email}/{password}")
 	public ResponseEntity<ServiceStatus> login(@PathVariable("email")  @Valid String email, @PathVariable("password") String password){
 		logger.warn("[GET / LOGIN] verifica login dell'Anagrafica con " + email);
 		service.checkLoginPassword(email, password);
 		return new ResponseEntity<ServiceStatus>(ServiceStatus.LOGIN_SUCCESS, HttpStatus.ACCEPTED);
-	}
+	}*/
 
 	@PutMapping("OTP/{email}")
 	@ApiOperation(value = "Create OTP", notes = "This method creates a new OTP")

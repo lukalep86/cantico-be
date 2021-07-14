@@ -1,7 +1,6 @@
 package com.cantico.profile.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.cantico.profile.model.DettagliTecnici;
@@ -10,6 +9,9 @@ import com.cantico.profile.model.DettagliTecnici;
 
 @Service
 public interface DettagliTecniciService {
+
+   
+    
     
     public List<DettagliTecnici> findAll();
     public DettagliTecnici findById(Long id);

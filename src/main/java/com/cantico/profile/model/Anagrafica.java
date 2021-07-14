@@ -61,6 +61,7 @@ public class Anagrafica  {
 	private String cellulare;
 	@OneToOne(mappedBy = "userAnagrafica")
     private UserInfoProfile user;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private DettagliTecnici details;
 
@@ -89,29 +90,6 @@ public class Anagrafica  {
 
 	}
 
-
-	public Anagrafica(Long id, String nome, String cognome, String sesso,
-			@Pattern(regexp = "^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$|^$", message = "malformed code") String codiceFiscale,
-			String indirizzo, String cap, String stato, String provincia, String comune,
-			@NotBlank(message = "Email non può essere vuota") @NotNull(message = "Email è un campo obbligatorio.") @Email(message = "Formato email non valido") String email,
-			String password, String cellulare, UserInfoProfile user, DettagliTecnici details) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.sesso = sesso;
-		this.codiceFiscale = codiceFiscale;
-		this.indirizzo = indirizzo;
-		this.cap = cap;
-		this.stato = stato;
-		this.provincia = provincia;
-		this.comune = comune;
-		this.email = email;
-		this.password = password;
-		this.cellulare = cellulare;
-		this.user = user;
-		this.details = details;
-	}
 
 	public Long getId() {
         return id;

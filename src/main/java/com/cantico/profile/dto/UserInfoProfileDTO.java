@@ -2,6 +2,7 @@ package com.cantico.profile.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class UserInfoProfileDTO implements Serializable{
@@ -15,24 +16,24 @@ public class UserInfoProfileDTO implements Serializable{
     private String maritalStatus;
     private String education;
     private String geoLocation;
-    private String languages;
+    private List<String> languages;
     private String employment;
     private String frequenter;
     private Boolean deviceUse;
     private String reasonDeviceUse;
     private String eventFrequency;
     private String viewer;
-    private String operaType;
-    private String purchasingOperaItems;
+    private List<String> operaType;
+    private List<String> purchasingOperaItems;
     private Boolean communityAttendance;
-    private String hobby;
-    private String culturalInteresting;
+    private List<String> hobby;
+    private List<String> culturalInteresting;
     private Date dateInsert;
     private Date dateModify;
     private Boolean notificationRecieved;
     private Date dateNotificationRecieved;
     private Date dateNotificationExperied;
-    private Set<NotificationDTO> notification;
+    private Set<NotificationDTO> notifications;
     
 	public UserInfoProfileDTO() {
 		super();
@@ -40,11 +41,11 @@ public class UserInfoProfileDTO implements Serializable{
 	}
 
 	public UserInfoProfileDTO(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
-			String education, String geoLocation, String languages, String employment, String frequenter,
-			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, String operaType,
-			String purchasingOperaItems, Boolean communityAttendance, String hobby, String culturalInteresting,
-			Date dateInsert, Date dateModify, Boolean notificationRecieved, Date dateNotificationRecieved,
-			Date dateNotificationExperied, Set<NotificationDTO> notification) {
+			String education, String geoLocation, List<String> languages, String employment, String frequenter,
+			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, List<String> operaType,
+			List<String> purchasingOperaItems, Boolean communityAttendance, List<String> hobby,
+			List<String> culturalInteresting, Date dateInsert, Date dateModify, Boolean notificationRecieved,
+			Date dateNotificationRecieved, Date dateNotificationExperied, Set<NotificationDTO> notifications) {
 		super();
 		this.idUserInfoProfile = idUserInfoProfile;
 		this.idUser = idUser;
@@ -70,7 +71,7 @@ public class UserInfoProfileDTO implements Serializable{
 		this.notificationRecieved = notificationRecieved;
 		this.dateNotificationRecieved = dateNotificationRecieved;
 		this.dateNotificationExperied = dateNotificationExperied;
-		this.notification = notification;
+		this.notifications = notifications;
 	}
 
 	public Long getIdUserInfoProfile() {
@@ -129,11 +130,11 @@ public class UserInfoProfileDTO implements Serializable{
 		this.geoLocation = geoLocation;
 	}
 
-	public String getLanguages() {
+	public List<String> getLanguages() {
 		return languages;
 	}
 
-	public void setLanguages(String languages) {
+	public void setLanguages(List<String> languages) {
 		this.languages = languages;
 	}
 
@@ -185,19 +186,19 @@ public class UserInfoProfileDTO implements Serializable{
 		this.viewer = viewer;
 	}
 
-	public String getOperaType() {
+	public List<String> getOperaType() {
 		return operaType;
 	}
 
-	public void setOperaType(String operaType) {
+	public void setOperaType(List<String> operaType) {
 		this.operaType = operaType;
 	}
 
-	public String getPurchasingOperaItems() {
+	public List<String> getPurchasingOperaItems() {
 		return purchasingOperaItems;
 	}
 
-	public void setPurchasingOperaItems(String purchasingOperaItems) {
+	public void setPurchasingOperaItems(List<String> purchasingOperaItems) {
 		this.purchasingOperaItems = purchasingOperaItems;
 	}
 
@@ -209,19 +210,19 @@ public class UserInfoProfileDTO implements Serializable{
 		this.communityAttendance = communityAttendance;
 	}
 
-	public String getHobby() {
+	public List<String> getHobby() {
 		return hobby;
 	}
 
-	public void setHobby(String hobby) {
+	public void setHobby(List<String> hobby) {
 		this.hobby = hobby;
 	}
 
-	public String getCulturalInteresting() {
+	public List<String> getCulturalInteresting() {
 		return culturalInteresting;
 	}
 
-	public void setCulturalInteresting(String culturalInteresting) {
+	public void setCulturalInteresting(List<String> culturalInteresting) {
 		this.culturalInteresting = culturalInteresting;
 	}
 
@@ -265,12 +266,12 @@ public class UserInfoProfileDTO implements Serializable{
 		this.dateNotificationExperied = dateNotificationExperied;
 	}
 
-	public Set<NotificationDTO> getNotification() {
-		return notification;
+	public Set<NotificationDTO> getNotifications() {
+		return notifications;
 	}
 
-	public void setNotification(Set<NotificationDTO> notification) {
-		this.notification = notification;
+	public void setNotifications(Set<NotificationDTO> notifications) {
+		this.notifications = notifications;
 	}
 
 	@Override
@@ -296,7 +297,7 @@ public class UserInfoProfileDTO implements Serializable{
 		result = prime * result + ((idUserInfoProfile == null) ? 0 : idUserInfoProfile.hashCode());
 		result = prime * result + ((languages == null) ? 0 : languages.hashCode());
 		result = prime * result + ((maritalStatus == null) ? 0 : maritalStatus.hashCode());
-		result = prime * result + ((notification == null) ? 0 : notification.hashCode());
+		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
 		result = prime * result + ((notificationRecieved == null) ? 0 : notificationRecieved.hashCode());
 		result = prime * result + ((operaType == null) ? 0 : operaType.hashCode());
 		result = prime * result + ((purchasingOperaItems == null) ? 0 : purchasingOperaItems.hashCode());
@@ -409,10 +410,10 @@ public class UserInfoProfileDTO implements Serializable{
 				return false;
 		} else if (!maritalStatus.equals(other.maritalStatus))
 			return false;
-		if (notification == null) {
-			if (other.notification != null)
+		if (notifications == null) {
+			if (other.notifications != null)
 				return false;
-		} else if (!notification.equals(other.notification))
+		} else if (!notifications.equals(other.notifications))
 			return false;
 		if (notificationRecieved == null) {
 			if (other.notificationRecieved != null)
@@ -493,10 +494,9 @@ public class UserInfoProfileDTO implements Serializable{
 		builder.append(dateNotificationRecieved);
 		builder.append(", dateNotificationExperied=");
 		builder.append(dateNotificationExperied);
-		builder.append(", notification=");
-		builder.append(notification);
+		builder.append(", notifications=");
+		builder.append(notifications);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }
