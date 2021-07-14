@@ -24,7 +24,7 @@ public class PushNotifyServiceImpl implements PushNotifyService{
 	UserInfoProfileRepository userInfoProfileRepository;
 
 	@Override
-	public List<PushNotifyDTO> getPushNotifyByUserInfoProfile(long idUserInfoProfile) {
+	public List<PushNotifyDTO> getPushNotifyByUserInfoProfile(Long idUserInfoProfile) {
 		
 		Optional<UserInfoProfile> userInfoProfile = userInfoProfileRepository.findById(idUserInfoProfile);
 		List<PushNotifyDTO> pushNotifyDTOList = new ArrayList<>();
@@ -46,7 +46,7 @@ public class PushNotifyServiceImpl implements PushNotifyService{
 	}
 
 	@Override
-	public void deletePushNotfyById(int idPushNotify) {
+	public void deletePushNotfyById(Integer idPushNotify) {
 		
 		Optional<PushNotify> pushNotify = pushNotifyRepository.findById(idPushNotify);
 		if(pushNotify.isPresent()) {
@@ -55,14 +55,14 @@ public class PushNotifyServiceImpl implements PushNotifyService{
 	}
 
 	@Override
-	public PushNotifyDTO checkPushNotify(int idPushNotify) {
+	public PushNotifyDTO checkPushNotify(Integer idPushNotify) {
 		
 		Optional<PushNotify> pushNotify = pushNotifyRepository.findById(idPushNotify);
 		PushNotifyDTO pushDTO = new PushNotifyDTO();
 		if(pushNotify.isPresent()) {
 			PushNotify push = pushNotify.get();
 			push.setChecked(true);
-			pushNotifyRepository.save(push);
+			push = pushNotifyRepository.save(push);
 			
 			pushDTO.setIdPushNotify(push.getIdPushNotify());
 			pushDTO.setIdUserProfile(push.getUserInfoProfile().getIdUserInfoProfile());

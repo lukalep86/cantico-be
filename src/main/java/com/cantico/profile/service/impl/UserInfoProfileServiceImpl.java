@@ -182,7 +182,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 				String email = user.getEmail();
 				String telephone = user.getCellulare();
 				UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagrafica(user);
-				if(userInfoProfile.getNotificationRecieved() == null || userInfoProfile.getNotificationRecieved() == false) {
+				//if(userInfoProfile.getNotificationRecieved() == null || userInfoProfile.getNotificationRecieved() == false) {
 					List<Notification> notificationList = notificationRepository.findByUserInfoProfile(userInfoProfile);
 					if(!notificationList.isEmpty()) {
 						for(Notification notification : notificationList) {
@@ -199,7 +199,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 											
 											helper.setText(sendCustomNotification.getContent(), true);
 											
-											mailSender.send(message);
+											//mailSender.send(message);
 									} catch (MessagingException e) {
 									
 										logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail ", e.getCause());
@@ -237,7 +237,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 							userInfoProfileRepository.save(userInfoProfile);
 						}
 					}
-				}
+				//}
 			}
 		}
 		

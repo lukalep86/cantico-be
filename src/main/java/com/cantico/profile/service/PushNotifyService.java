@@ -9,10 +9,10 @@ import com.cantico.profile.dto.PushNotifyDTO;
 @Service
 public interface PushNotifyService {
 	
-	public List<PushNotifyDTO> getPushNotifyByUserInfoProfile(long idUserInfoProfile);
+	public List<PushNotifyDTO> getPushNotifyByUserInfoProfile(Long idUserInfoProfile);
 	
-	public void deletePushNotfyById(int idPushNotify);
+	public void deletePushNotfyById(Integer idPushNotify);
 	
-	public PushNotifyDTO checkPushNotify(int idPushNotify);
+	public PushNotifyDTO checkPushNotify(Integer idPushNotify);
 
 }

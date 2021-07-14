@@ -71,8 +71,6 @@ public class AnagraficaController  {
 	
 	}
 
-
-
 	@GetMapping(value = "/")
 	@ApiOperation(value = "Find registry", notes = "This method findes existing registries")
 	public ResponseEntity<List<Anagrafica>> findAnagrafica(){
@@ -91,7 +89,6 @@ public class AnagraficaController  {
 		logger.warn("[GET / FINDANAGRAFICABYEMAIL] restituisce l' Anagrafica con email" + email);	
 		return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
 		
-
 
 	}
 

@@ -25,7 +25,7 @@ public class PushNotifyController {
 	PushNotifyService pushNotifyService;
 	
 	@GetMapping("/{idUserInfoProfile}")
-	public ResponseEntity<List<PushNotifyDTO>> getPushNotifyByUserInfoProfile(@PathVariable("idUserInfoProfile") long idUserInfoProfile){
+	public ResponseEntity<List<PushNotifyDTO>> getPushNotifyByUserInfoProfile(@PathVariable("idUserInfoProfile") Long idUserInfoProfile){
 		
 		List<PushNotifyDTO> pushNotifyList = pushNotifyService.getPushNotifyByUserInfoProfile(idUserInfoProfile);
 		
@@ -34,7 +34,7 @@ public class PushNotifyController {
 	}
 
 	@PutMapping("/checkPush/{idPushNotify}")
-	public ResponseEntity<PushNotifyDTO> checkPush(int idPushNotify){
+	public ResponseEntity<PushNotifyDTO> checkPush(@PathVariable("idPushNotify")Integer idPushNotify){
 		
 		PushNotifyDTO pushNotify = pushNotifyService.checkPushNotify(idPushNotify);
 		
@@ -43,7 +43,7 @@ public class PushNotifyController {
 	}
 	
 	@DeleteMapping("/delete/{idPushNotify}")
-	public ResponseEntity<Void> deletePush(int idPushNotify){
+	public ResponseEntity<Void> deletePush(@PathVariable("idPushNotify")Integer idPushNotify){
 			
 		pushNotifyService.deletePushNotfyById(idPushNotify);
 			

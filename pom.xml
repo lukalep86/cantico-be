@@ -10,13 +10,13 @@
 	</parent>
 
 	<groupId>it.eaisoftware</groupId>
-	<artifactId>canticoIDM</artifactId>
+	<artifactId>canticoProfile</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>canticoIDM</name>
+	<name>canticoProfile</name>
 	<description>Identity Management</description>
 	<!-- packaging>jar</packaging -->
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -32,6 +32,12 @@
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-openfeign</artifactId>
+    		<version>3.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -133,7 +139,16 @@
 				<artifactId>json</artifactId>
 				<version>20180130</version>
 			</dependency>
+			
 		</dependencies>
+		<dependencyManagement>
+     		<dependencies>
+         		<dependency>
+            	<groupId>org.springframework.cloud</groupId>
+            	<artifactId>spring-cloud-dependencies</artifactId>
+        		</dependency>
+    		</dependencies>
+		</dependencyManagement>
 		<profiles>
 			<profile>
 				<id>local</id>
