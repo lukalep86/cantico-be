@@ -34,18 +34,20 @@ public class UserInfoProfileDTO implements Serializable{
     private Date dateNotificationRecieved;
     private Date dateNotificationExperied;
     private Set<NotificationDTO> notifications;
+    public String email;
     
 	public UserInfoProfileDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public UserInfoProfileDTO(Long idUserInfoProfile, Long idUser, String gender, Integer age, String maritalStatus,
 			String education, String geoLocation, List<String> languages, String employment, String frequenter,
 			Boolean deviceUse, String reasonDeviceUse, String eventFrequency, String viewer, List<String> operaType,
 			List<String> purchasingOperaItems, Boolean communityAttendance, List<String> hobby,
 			List<String> culturalInteresting, Date dateInsert, Date dateModify, Boolean notificationRecieved,
-			Date dateNotificationRecieved, Date dateNotificationExperied, Set<NotificationDTO> notifications) {
+			Date dateNotificationRecieved, Date dateNotificationExperied, Set<NotificationDTO> notifications,
+			String email) {
 		super();
 		this.idUserInfoProfile = idUserInfoProfile;
 		this.idUser = idUser;
@@ -72,6 +74,7 @@ public class UserInfoProfileDTO implements Serializable{
 		this.dateNotificationRecieved = dateNotificationRecieved;
 		this.dateNotificationExperied = dateNotificationExperied;
 		this.notifications = notifications;
+		this.email = email;
 	}
 
 	public Long getIdUserInfoProfile() {
@@ -274,6 +277,14 @@ public class UserInfoProfileDTO implements Serializable{
 		this.notifications = notifications;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -287,6 +298,7 @@ public class UserInfoProfileDTO implements Serializable{
 		result = prime * result + ((dateNotificationRecieved == null) ? 0 : dateNotificationRecieved.hashCode());
 		result = prime * result + ((deviceUse == null) ? 0 : deviceUse.hashCode());
 		result = prime * result + ((education == null) ? 0 : education.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((employment == null) ? 0 : employment.hashCode());
 		result = prime * result + ((eventFrequency == null) ? 0 : eventFrequency.hashCode());
 		result = prime * result + ((frequenter == null) ? 0 : frequenter.hashCode());
@@ -297,8 +309,8 @@ public class UserInfoProfileDTO implements Serializable{
 		result = prime * result + ((idUserInfoProfile == null) ? 0 : idUserInfoProfile.hashCode());
 		result = prime * result + ((languages == null) ? 0 : languages.hashCode());
 		result = prime * result + ((maritalStatus == null) ? 0 : maritalStatus.hashCode());
-		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
 		result = prime * result + ((notificationRecieved == null) ? 0 : notificationRecieved.hashCode());
+		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
 		result = prime * result + ((operaType == null) ? 0 : operaType.hashCode());
 		result = prime * result + ((purchasingOperaItems == null) ? 0 : purchasingOperaItems.hashCode());
 		result = prime * result + ((reasonDeviceUse == null) ? 0 : reasonDeviceUse.hashCode());
@@ -360,6 +372,11 @@ public class UserInfoProfileDTO implements Serializable{
 				return false;
 		} else if (!education.equals(other.education))
 			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (employment == null) {
 			if (other.employment != null)
 				return false;
@@ -410,15 +427,15 @@ public class UserInfoProfileDTO implements Serializable{
 				return false;
 		} else if (!maritalStatus.equals(other.maritalStatus))
 			return false;
-		if (notifications == null) {
-			if (other.notifications != null)
-				return false;
-		} else if (!notifications.equals(other.notifications))
-			return false;
 		if (notificationRecieved == null) {
 			if (other.notificationRecieved != null)
 				return false;
 		} else if (!notificationRecieved.equals(other.notificationRecieved))
+			return false;
+		if (notifications == null) {
+			if (other.notifications != null)
+				return false;
+		} else if (!notifications.equals(other.notifications))
 			return false;
 		if (operaType == null) {
 			if (other.operaType != null)
@@ -496,6 +513,8 @@ public class UserInfoProfileDTO implements Serializable{
 		builder.append(dateNotificationExperied);
 		builder.append(", notifications=");
 		builder.append(notifications);
+		builder.append(", email=");
+		builder.append(email);
 		builder.append("]");
 		return builder.toString();
 	}

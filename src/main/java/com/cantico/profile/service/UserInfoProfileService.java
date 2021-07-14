@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cantico.profile.cloud.impl.AnagraficaClientCustom;
 import com.cantico.profile.dto.SendCustomNotification;
 import com.cantico.profile.dto.UserInfoProfileCustomFilter;
 import com.cantico.profile.dto.UserInfoProfileDTO;
@@ -17,7 +18,7 @@ public interface UserInfoProfileService {
 	
 	List<UserInfoProfileDTO> getUserInfoProfileList();
 	
-	UserInfoProfileDTO getUserInfoProfileById(long idUserProfile);
+	UserInfoProfileDTO getUserInfoProfileByUserAnagrafica(AnagraficaClientCustom anagraficaClient);
 	
 	List<UserInfoProfileDTO> getUserFilterByAdmin(UserInfoProfileCustomFilter userInfoProfileCustomFilter);
 
