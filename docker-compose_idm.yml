@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+
+  be-idm:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: eai/cantico-profile
+    ports:
+      - "${SERVER_PORT}:8080"
+    env_file:
+      - docker.env
+    networks:
+      idm:
+
+networks:
+    idm:
+        name: ${IDM_NETWORK}
+        external: true
