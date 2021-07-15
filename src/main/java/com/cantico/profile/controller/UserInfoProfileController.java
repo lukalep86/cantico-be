@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cantico.profile.cloud.AnagraficaClient;
@@ -31,6 +31,7 @@ import com.cantico.profile.service.UserInfoProfileService;
 import com.cantico.profile.utils.JwtExtractEmail;
 
 import feign.FeignException;
+import feign.FeignException.FeignClientException;
 
 @CrossOrigin(origins = "*", allowedHeaders="*")
 @RestController
@@ -51,16 +52,19 @@ public class UserInfoProfileController {
 	@Autowired
 	AnagraficaClient anagraficaClient;
 	
-	//METODO DA USARE CON AUTH JWT
-	/*@PutMapping("/profile")
-	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(Authentication authentication, @RequestBody @Valid UserInfoProfileDTO userInfoProfileDTO, 
+	
+	@PutMapping("/profile")
+	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(@RequestBody @Valid UserInfoProfileDTO userInfoProfileDTO, 
 			@RequestHeader(required = false, name = "authorization") String jwt){
 		
-		String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
+		logger.info("init method in UserInfoProfileController: createUpdateUserInfoProfile");
+		
+		//String email = jwtExtractEmail.getPropertyFromToken(jwt, "email"); //DECOMMENTATE QUANDO SI USA IL JWT AUTH
 		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
 		try {
-			anagraficaResponse = anagraficaClient.findAnagrafica(email);
+			//anagraficaResponse = anagraficaClient.findAnagrafica(email);  DECOMMENTARE QUANDO SI USA IL JWT AUTH
+			anagraficaResponse = anagraficaClient.findAnagrafica(userInfoProfileDTO.getEmail()); //COMMENTARE QUANDO SI USA IL JWT
 			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
 				AnagraficaClientCustom body = anagraficaResponse.getBody();
 				if (body.getEmail() != null) {
@@ -73,37 +77,24 @@ public class UserInfoProfileController {
 
 		}catch(FeignException e) {
 			logger.error(
-					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
+					String.format("Errore durante il recupero delle informazioni dell'utente: " + userInfoProfileDTO.getEmail(), e.getMessage()));
 			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
 
 		}
 		
-		return new ResponseEntity<UserInfoProfileDTO>(userInfoProfile, HttpStatus.OK);
-		
-	}*/
-	
-	//METODO DI TEST SENZA JWT
-	@PutMapping("/profile")
-	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(@RequestBody @Valid UserInfoProfileDTO userInfoProfileDTO){
-		
-		UserInfoProfileDTO userInfoProfile = userInfoProfileService.createUpdateUserInfoProfile(userInfoProfileDTO);
-		
+		logger.info("end method in UserInfoProfileController: createUpdateUserInfoProfile");
 		return new ResponseEntity<UserInfoProfileDTO>(userInfoProfile, HttpStatus.OK);
 		
 	}
 	
 	@GetMapping("/{email}")
-	public ResponseEntity<UserInfoProfileDTO> getUserInfoProfileList(@PathVariable("email") String email/*,
-	@RequestHeader(required = false, name = "authorization") String jwt*/){
+	public ResponseEntity<UserInfoProfileDTO> getUserInfoProfileList(@PathVariable("email") String email,
+	@RequestHeader(required = false, name = "authorization") String jwt){
 		
-		/*
-		 * JWT jsonExtract
-		 * String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
-			Anagrafica authUser = anagraficaService.findByEmail(email);*/
-		
+		logger.info("init method in UserInfoProfileController: getUserInfoProfileList");
+
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
-		//Use feign-client
-		/*ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
+		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		try {
 			anagraficaResponse = anagraficaClient.findAnagrafica(email);
 			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
@@ -111,33 +102,28 @@ public class UserInfoProfileController {
 				if (body.getEmail() != null) {
 					userInfoProfile = userInfoProfileService.getUserInfoProfileByUserAnagrafica(anagraficaResponse.getBody());
 				}
-			} else {
-				throw new RuntimeException(
-						String.format("findAnagraficaByEmail status: ", anagraficaResponse.getStatusCode().toString()));
-			}
+			} 
 
-		}catch(FeignException e) {
+		}catch(FeignClientException e) {
 			logger.error(
 					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
 			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
 
-		}*/
-		
-		
-		userInfoProfile = userInfoProfileService.getUserInfoProfileByEmail(email);
+		}
+
+		logger.info("end method in UserInfoProfileController: getUserInfoProfileList");
 		return new ResponseEntity<UserInfoProfileDTO>(userInfoProfile, HttpStatus.OK);
 		
 	}
 	
 	@PostMapping("/cluster")
-	public ResponseEntity<List<UserInfoProfileDTO>> getUserInfoProfileList(@RequestBody UserInfoProfileCustomFilter userInfoProfileCustomFilter/*,
-			@RequestHeader(required = false, name = "authorization") String jwt*/){
+	public ResponseEntity<List<UserInfoProfileDTO>> getUserInfoProfileList(@RequestBody UserInfoProfileCustomFilter userInfoProfileCustomFilter){
 		
-		/*String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
-		Anagrafica authUser = anagraficaService.findByEmail(email);*/
-		
+		logger.info("init method in UserInfoProfileController: getUserInfoProfileList");
+
 		List<UserInfoProfileDTO> userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter);
 		
+		logger.info("end method in UserInfoProfileController: getUserInfoProfileList");
 		return new ResponseEntity<List<UserInfoProfileDTO>>(userInfoProfileList, HttpStatus.OK);
 		
 	}
@@ -145,8 +131,11 @@ public class UserInfoProfileController {
 	@PostMapping("/sendNotification")
 	public ResponseEntity<SendCustomNotification> sendNotification(@RequestBody SendCustomNotification sendCustomNotification) throws MailAuthenticationException, ParseException{
 		
+		logger.info("init method in UserInfoProfileController: sendNotification");
+
 		SendCustomNotification notificationSent = userInfoProfileService.sendNotification(sendCustomNotification);
 		
+		logger.info("end method in UserInfoProfileController: sendNotification");
 		return new ResponseEntity<SendCustomNotification>(notificationSent, HttpStatus.OK);
 	}
 	

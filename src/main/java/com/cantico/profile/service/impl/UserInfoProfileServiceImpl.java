@@ -15,15 +15,12 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.cantico.profile.cloud.AnagraficaClient;
 import com.cantico.profile.cloud.impl.AnagraficaClientCustom;
-import com.cantico.profile.controller.AnagraficaController;
 import com.cantico.profile.dto.NotificationDTO;
 import com.cantico.profile.dto.SendCustomNotification;
 import com.cantico.profile.dto.UserInfoProfileCustomFilter;
@@ -41,8 +38,6 @@ import com.cantico.profile.repository.PushNotifyRepository;
 import com.cantico.profile.repository.UserInfoProfileRepository;
 import com.cantico.profile.repository.impl.UserInfoProfileCustomRepositoryImpl;
 import com.cantico.profile.service.UserInfoProfileService;
-
-import feign.FeignException;
 
 @Component
 public class UserInfoProfileServiceImpl implements UserInfoProfileService{
@@ -72,47 +67,16 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 
 	@Override
 	@Transactional
-	public UserInfoProfileDTO createUpdateUserInfoProfile(UserInfoProfileDTO userInfoProfileDTO) {
+	public UserInfoProfileDTO createUpdateUserInfoProfile(UserInfoProfileDTO userInfoProfileDTO, Long idAnagrafica) {
 		
 		UserInfoProfileDTO userInfoProfileDTOResponse = new UserInfoProfileDTO();
 		
 		Set<Notification> notificationList = new HashSet<>();
-		
-		//METHOD to use feign-client
-		/*
-		 *Long idAnagrafica = null;
-		 * ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
-		try {
-			anagraficaResponse = anagraficaClient.findAnagrafica(userInfoProfileDTO.getEmail());
-			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
-				AnagraficaClientCustom body = anagraficaResponse.getBody();
-				if (body.getEmail() != null) {
-					idAnagrafica = anagraficaResponse.getBody().getId();
-				}
-			} else {
-				throw new RuntimeException(
-						String.format("findAnagraficaByEmail status: ", anagraficaResponse.getStatusCode().toString()));
-			}
-
-		}catch(FeignException e) {
-			logger.error(
-					String.format("Errore durante il recupero delle informazioni dell'utente: " + userInfoProfileDTO.getEmail(), e.getMessage()));
-			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
-
-		}
-		
+				
 		Optional<Anagrafica> anagrafica = anagraficaRepository.findById(idAnagrafica);
 		if(!anagrafica.isPresent()) {
 			throw new ResourceNotFoundException("No User Found with id: " + idAnagrafica);
-		}*/
-		
-		
-		//------------------------------------METHOD WITHOUT FEIGN-CLIENT----------------------------------------
-		Anagrafica anagrafica = anagraficaRepository.findByEmail(userInfoProfileDTO.getEmail());
-		if(anagrafica == null) {
-			throw new ResourceNotFoundException("No User Found with email: " + userInfoProfileDTO.getEmail());
 		}
-		//-------------------------------------------------------------------------------------------------------------
 		
 		if(userInfoProfileDTO.getIdUserInfoProfile() != null) {
 			Optional<UserInfoProfile> userInfoProfileDb = userInfoProfileRepository.findById(userInfoProfileDTO.getIdUserInfoProfile());
@@ -150,8 +114,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		}else {
 			UserInfoProfile newUserInfoProfile = UserInfoProfileMapper.toUserInfoProfile(userInfoProfileDTO);
 			newUserInfoProfile.setDateInsert(new Date());
-			//newUserInfoProfile.setUserAnagrafica(anagrafica.get());
-			newUserInfoProfile.setUserAnagrafica(anagrafica);
+			newUserInfoProfile.setUserAnagrafica(anagrafica.get());
 			userInfoProfileRepository.save(newUserInfoProfile);
 			
 			if(userInfoProfileDTO.getNotifications() != null || !userInfoProfileDTO.getNotifications().isEmpty()) {
@@ -188,7 +151,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 	@Override
 	public UserInfoProfileDTO getUserInfoProfileByUserAnagrafica(AnagraficaClientCustom anagraficaClient) {
 		
-		/*UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagraficaWhereId(anagraficaClient.getId());
+		UserInfoProfile userInfoProfile = userInfoProfileRepository.getUserInfoProfileByUserIdAnagrafica(anagraficaClient.getId());
 		UserInfoProfileDTO userInfoProfileDTO = new UserInfoProfileDTO();
 		
 		if(userInfoProfile != null) {
@@ -196,8 +159,8 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 			userInfoProfileDTO.setEmail(anagraficaClient.getEmail());
 			
 		}
-		*/
-		return null; // userInfoProfileDTO;
+		
+		return userInfoProfileDTO;
 	}
 
 	@Override
@@ -244,7 +207,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 											
 											helper.setText(sendCustomNotification.getContent(), true);
 											
-											//mailSender.send(message);
+											mailSender.send(message);
 									} catch (MessagingException e) {
 									
 										logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail ", e.getCause());
@@ -287,23 +250,6 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 		}
 		
 		return sendCustomNotification;
-	}
-
-	@Override
-	public UserInfoProfileDTO getUserInfoProfileByEmail(String email) {
-		
-		Anagrafica anagrafica = anagraficaRepository.findByEmail(email);
-		UserInfoProfileDTO userInfoProfileDTO = new UserInfoProfileDTO();
-		
-		if(anagrafica != null) {
-			UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagrafica(anagrafica);		
-			if(userInfoProfile != null) {
-				userInfoProfileDTO = UserInfoProfileMapper.toUserInfoProfileDTO(userInfoProfile);
-			}
-			userInfoProfileDTO.setEmail(anagrafica.getEmail());
-		}
-		
-		return userInfoProfileDTO;
 	}
 
 }

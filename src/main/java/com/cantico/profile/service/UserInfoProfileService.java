@@ -14,12 +14,11 @@ import com.cantico.profile.exception.MailAuthenticationException;
 @Service
 public interface UserInfoProfileService {
 	
-	UserInfoProfileDTO createUpdateUserInfoProfile(UserInfoProfileDTO userInfoProfile);
+	UserInfoProfileDTO createUpdateUserInfoProfile(UserInfoProfileDTO userInfoProfile, Long idAnagrafica);
 	
 	List<UserInfoProfileDTO> getUserInfoProfileList();
 	
 	UserInfoProfileDTO getUserInfoProfileByUserAnagrafica(AnagraficaClientCustom anagraficaClient);
-	UserInfoProfileDTO getUserInfoProfileByEmail(String email);
 	
 	List<UserInfoProfileDTO> getUserFilterByAdmin(UserInfoProfileCustomFilter userInfoProfileCustomFilter);
 
