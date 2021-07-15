@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 @Entity(name="notification")
 public class Notification implements Serializable {
 
@@ -25,8 +27,8 @@ public class Notification implements Serializable {
     @Column(nullable=false, length=255)
     private String description;
     
-    @Column(length=1)
-    private Boolean enabled;
+    @Column(length=1, columnDefinition = "boolean default false")
+    private Boolean enabled = false;
     
     @ManyToOne(optional=false)
     @JoinColumn(name="id_user_info_profile", nullable=false)

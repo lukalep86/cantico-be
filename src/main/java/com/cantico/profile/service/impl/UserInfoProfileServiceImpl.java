@@ -198,7 +198,7 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 								 MimeMessage message = mailSender.createMimeMessage();              
 									MimeMessageHelper helper = new MimeMessageHelper(message);
 									try{		
-											helper.setFrom("canticoidm@gmail.com", "CANTICO");
+											helper.setFrom("canticoprofile@gmail.com", "CANTICO");
 											helper.setTo(email);
 											
 											String subject = "Notifica Invito Evento";

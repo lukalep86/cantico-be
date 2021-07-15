@@ -52,8 +52,8 @@ public class UserInfoProfile implements Serializable {
     @Column(length=100)
     private String frequenter;
     
-    @Column(name="device_use", length=1)
-    private Boolean deviceUse;
+    @Column(name="device_use", length=1, columnDefinition = "boolean default false")
+    private Boolean deviceUse = false;
     
     @Column(name="reason_device_use", length=255)
     private String reasonDeviceUse;
@@ -70,8 +70,8 @@ public class UserInfoProfile implements Serializable {
     @Column(name="purchasing_opera_items", length=1024)
     private String purchasingOperaItems;
     
-    @Column(name="community_attendance", length=255)
-    private Boolean communityAttendance;
+    @Column(name="community_attendance", length=1, columnDefinition = "boolean default false")
+    private Boolean communityAttendance = false;
     
     @Column(length=1024)
     private String hobby;
@@ -85,8 +85,8 @@ public class UserInfoProfile implements Serializable {
     @Column(name="date_modify")
     private Date dateModify;
     
-    @Column(name="notification_recieved", length=1)
-    private Boolean notificationRecieved;
+    @Column(name="notification_recieved", length=1, columnDefinition = "boolean default false")
+    private Boolean notificationRecieved = false;
     
     @Column(name="date_notification_recieved")
     private Date dateNotificationRecieved;

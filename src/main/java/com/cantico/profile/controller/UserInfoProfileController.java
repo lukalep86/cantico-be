@@ -1,6 +1,7 @@
 package com.cantico.profile.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -73,7 +74,7 @@ public class UserInfoProfileController {
 		}catch(FeignException e) {
 			logger.error(
 					String.format("Errore durante il recupero delle informazioni dell'utente: " + userInfoProfileDTO.getEmail(), e.getMessage()));
-			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
+			throw new RuntimeException(String.format("Utente non trovati!", e.getMessage()));
 
 		}
 		
@@ -105,7 +106,7 @@ public class UserInfoProfileController {
 		}catch(FeignException e) {
 			logger.error(
 					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
-			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
+			throw new RuntimeException(String.format("Utente non trovati!", e.getMessage()));
 
 		}
 
@@ -115,12 +116,30 @@ public class UserInfoProfileController {
 	}
 	
 	@PostMapping("/cluster")
-	public ResponseEntity<List<UserInfoProfileDTO>> getUserInfoProfileList(@RequestBody UserInfoProfileCustomFilter userInfoProfileCustomFilter){
+	public ResponseEntity<List<UserInfoProfileDTO>> getUserInfoProfileList(@RequestBody UserInfoProfileCustomFilter userInfoProfileCustomFilter,
+			@RequestHeader(required = false, name = "authorization") String jwt){
 		
 		logger.info("init method in UserInfoProfileController: getUserInfoProfileList");
 
-		List<UserInfoProfileDTO> userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter);
+		List<UserInfoProfileDTO> userInfoProfileList = new ArrayList<>();
+		/*String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
+		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
+		try {
+			anagraficaResponse = anagraficaClient.findAnagrafica(email);
+			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
+				AnagraficaClientCustom body = anagraficaResponse.getBody();
+				if (body.getEmail() != null) {
+					userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter);
+				}
+			} 
+
+		}catch(FeignException e) {
+			logger.error(
+					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
+					throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
+		}*/
 		
+		userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter);
 		logger.info("end method in UserInfoProfileController: getUserInfoProfileList");
 		return new ResponseEntity<List<UserInfoProfileDTO>>(userInfoProfileList, HttpStatus.OK);
 		
