@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public Docket productApi() {
      
         return new Docket(DocumentationType.SWAGGER_2)
-              .select().apis(RequestHandlerSelectors.basePackage("it.eaisoftware.canticoIDM.controllers"))
+              .select().apis(RequestHandlerSelectors.basePackage("com.cantico.profile.config.controller"))
             .paths(PathSelectors.any())
            .paths(Predicates.not(PathSelectors.regex("/error.*")))
           .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))

@@ -26,25 +26,20 @@ import com.cantico.profile.dto.SendCustomNotification;
 import com.cantico.profile.dto.UserInfoProfileCustomFilter;
 import com.cantico.profile.dto.UserInfoProfileDTO;
 import com.cantico.profile.exception.MailAuthenticationException;
-import com.cantico.profile.service.AnagraficaService;
 import com.cantico.profile.service.UserInfoProfileService;
 import com.cantico.profile.utils.JwtExtractEmail;
 
 import feign.FeignException;
-import feign.FeignException.FeignClientException;
 
 @CrossOrigin(origins = "*", allowedHeaders="*")
 @RestController
 @RequestMapping("/userInfo")
 public class UserInfoProfileController {
 	
-	Logger logger = LoggerFactory.getLogger(AnagraficaController.class);
+	Logger logger = LoggerFactory.getLogger(UserInfoProfileController.class);
 	
 	@Autowired
 	UserInfoProfileService userInfoProfileService;
-	
-	@Autowired
-	AnagraficaService anagraficaService;
 	
 	@Autowired
 	JwtExtractEmail jwtExtractEmail;
@@ -93,6 +88,9 @@ public class UserInfoProfileController {
 		
 		logger.info("init method in UserInfoProfileController: getUserInfoProfileList");
 
+		//NB: nel caso in cui viene utilizzato il Jwt, decommentare la string sottostanste e togliere il "@PathVariable("email") String email"
+		//		oltre a togliere {email} dal path
+		//String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
 		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		try {
@@ -104,7 +102,7 @@ public class UserInfoProfileController {
 				}
 			} 
 
-		}catch(FeignClientException e) {
+		}catch(FeignException e) {
 			logger.error(
 					String.format("Errore durante il recupero delle informazioni dell'utente: " + email, e.getMessage()));
 			throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));

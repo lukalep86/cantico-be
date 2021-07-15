@@ -12,9 +12,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import com.cantico.profile.utils.Unique;
-
 /**
  * The persistent class for the "Anagrafica" database table.
  * 
@@ -53,7 +50,6 @@ public class Anagrafica  {
 	@NotBlank(message = "Email non può essere vuota")
 	@NotNull(message="Email è un campo obbligatorio.")
 	@Email(message = "Formato email non valido")
-	@Unique(message="Email esistente")
 	private String email;
 	@Column(name="password")
 	private String password;

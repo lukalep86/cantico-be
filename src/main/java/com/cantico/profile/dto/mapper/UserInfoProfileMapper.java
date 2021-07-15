@@ -35,7 +35,7 @@ public class UserInfoProfileMapper {
 			userInfoProfileDTO.setCulturalInteresting(culturalInterestingList);
 		}
 		
-		userInfoProfile.setAge(userInfoProfileDTO.getAge());
+		userInfoProfileDTO.setAge(userInfoProfile.getAge());
 		userInfoProfileDTO.setDateInsert(userInfoProfile.getDateInsert());
 		userInfoProfileDTO.setDeviceUse(userInfoProfile.getDeviceUse());
 		userInfoProfileDTO.setEducation(userInfoProfile.getEducation());
@@ -74,7 +74,7 @@ public class UserInfoProfileMapper {
 		
 		userInfoProfileDTO.setReasonDeviceUse(userInfoProfile.getReasonDeviceUse());
 		userInfoProfileDTO.setViewer(userInfoProfile.getViewer());
-		userInfoProfileDTO.setDateInsert(userInfoProfile.getDateInsert());
+		userInfoProfileDTO.setDateModify(userInfoProfile.getDateModify());
 		userInfoProfileDTO.setDateNotificationExperied(userInfoProfile.getDateNotificationExperied());
 		userInfoProfileDTO.setDateNotificationRecieved(userInfoProfile.getDateNotificationRecieved());
 		
