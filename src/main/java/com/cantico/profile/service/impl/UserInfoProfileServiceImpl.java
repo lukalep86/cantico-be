@@ -299,9 +299,8 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 			UserInfoProfile userInfoProfile = userInfoProfileRepository.findByUserAnagrafica(anagrafica);		
 			if(userInfoProfile != null) {
 				userInfoProfileDTO = UserInfoProfileMapper.toUserInfoProfileDTO(userInfoProfile);
-				userInfoProfileDTO.setEmail(anagrafica.getEmail());
-				
 			}
+			userInfoProfileDTO.setEmail(anagrafica.getEmail());
 		}
 		
 		return userInfoProfileDTO;

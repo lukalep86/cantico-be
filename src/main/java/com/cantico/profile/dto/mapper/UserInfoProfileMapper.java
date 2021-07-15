@@ -27,7 +27,6 @@ public class UserInfoProfileMapper {
 			userInfoProfileDTO.setIdUserInfoProfile(userInfoProfile.getIdUserInfoProfile());
 		}
 		
-		userInfoProfileDTO.setAge(userInfoProfile.getAge());
 		userInfoProfileDTO.setCommunityAttendance(userInfoProfile.getCommunityAttendance());
 		
 		List<String> culturalInterestingList = new ArrayList<>();
@@ -36,6 +35,7 @@ public class UserInfoProfileMapper {
 			userInfoProfileDTO.setCulturalInteresting(culturalInterestingList);
 		}
 		
+		userInfoProfile.setAge(userInfoProfileDTO.getAge());
 		userInfoProfileDTO.setDateInsert(userInfoProfile.getDateInsert());
 		userInfoProfileDTO.setDeviceUse(userInfoProfile.getDeviceUse());
 		userInfoProfileDTO.setEducation(userInfoProfile.getEducation());
@@ -109,8 +109,10 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setAge(userInfoProfileDTO.getAge());
 		userInfoProfile.setCommunityAttendance(userInfoProfileDTO.getCommunityAttendance());
 		
-		String culturalInteresting = StringConcatByArray.concatByArray(userInfoProfileDTO.getCulturalInteresting());
-		userInfoProfile.setCulturalInteresting(culturalInteresting);
+		if(userInfoProfileDTO.getCulturalInteresting() != null) {
+			String culturalInteresting = StringConcatByArray.concatByArray(userInfoProfileDTO.getCulturalInteresting());
+			userInfoProfile.setCulturalInteresting(culturalInteresting);
+		}
 		
 		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
 		userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
@@ -121,19 +123,28 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setGender(userInfoProfileDTO.getGender());
 		userInfoProfile.setGeoLocation(userInfoProfileDTO.getGeoLocation());
 		
-		String languages = StringConcatByArray.concatByArray(userInfoProfileDTO.getLanguages());
-		userInfoProfile.setLanguages(languages);
+		if(userInfoProfileDTO.getLanguages() != null) {
+			String languages = StringConcatByArray.concatByArray(userInfoProfileDTO.getLanguages());
+			userInfoProfile.setLanguages(languages);
+		}
 		
-		String hobby = StringConcatByArray.concatByArray(userInfoProfileDTO.getHobby());
-		userInfoProfile.setHobby(hobby);
+		if(userInfoProfileDTO.getHobby() != null) {
+			String hobby = StringConcatByArray.concatByArray(userInfoProfileDTO.getHobby());
+			userInfoProfile.setHobby(hobby);
+		}
+		
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
 		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
 		
-		String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
-		userInfoProfile.setOperaType(operaType);
+		if(userInfoProfileDTO.getOperaType() != null) {
+			String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
+			userInfoProfile.setOperaType(operaType);
+		}
 		
-		String purchasingOperaItems = StringConcatByArray.concatByArray(userInfoProfileDTO.getPurchasingOperaItems());
-		userInfoProfile.setPurchasingOperaItems(purchasingOperaItems);
+		if(userInfoProfileDTO.getPurchasingOperaItems() != null) {
+			String purchasingOperaItems = StringConcatByArray.concatByArray(userInfoProfileDTO.getPurchasingOperaItems());
+			userInfoProfile.setPurchasingOperaItems(purchasingOperaItems);
+		}
 		
 		userInfoProfile.setReasonDeviceUse(userInfoProfileDTO.getReasonDeviceUse());
 		userInfoProfile.setViewer(userInfoProfileDTO.getViewer());
@@ -151,9 +162,12 @@ public class UserInfoProfileMapper {
 			userInfoProfile.setIdUserInfoProfile(userInfoProfileDTO.getIdUserInfoProfile());
 		}
 		
-		String culturalInteresting = StringConcatByArray.concatByArray(userInfoProfileDTO.getCulturalInteresting());
-		userInfoProfile.setCulturalInteresting(culturalInteresting);
+		if(userInfoProfileDTO.getCulturalInteresting() != null) {
+			String culturalInteresting = StringConcatByArray.concatByArray(userInfoProfileDTO.getCulturalInteresting());
+			userInfoProfile.setCulturalInteresting(culturalInteresting);
+		}
 		
+		userInfoProfile.setAge(userInfoProfileDTO.getAge());
 		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
 		userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
 		userInfoProfile.setEducation(userInfoProfileDTO.getEducation());
@@ -163,20 +177,29 @@ public class UserInfoProfileMapper {
 		userInfoProfile.setGender(userInfoProfileDTO.getGender());
 		userInfoProfile.setGeoLocation(userInfoProfileDTO.getGeoLocation());
 		
-		String languages = StringConcatByArray.concatByArray(userInfoProfileDTO.getLanguages());
-		userInfoProfile.setLanguages(languages);
+		if(userInfoProfileDTO.getLanguages() != null) {
+			String languages = StringConcatByArray.concatByArray(userInfoProfileDTO.getLanguages());
+			userInfoProfile.setLanguages(languages);
+		}
 		
-		String hobby = StringConcatByArray.concatByArray(userInfoProfileDTO.getHobby());
-		userInfoProfile.setHobby(hobby);
+		if(userInfoProfileDTO.getHobby() != null) {
+			String hobby = StringConcatByArray.concatByArray(userInfoProfileDTO.getHobby());
+			userInfoProfile.setHobby(hobby);
+		}
+		
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
 		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
 		
-		String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
-		userInfoProfile.setOperaType(operaType);
-		
-		String purchasingOperaItems = StringConcatByArray.concatByArray(userInfoProfileDTO.getPurchasingOperaItems());
-		userInfoProfile.setPurchasingOperaItems(purchasingOperaItems);
-		
+		if(userInfoProfileDTO.getOperaType() != null) {
+			String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
+			userInfoProfile.setOperaType(operaType);
+		}
+			
+		if(userInfoProfileDTO.getPurchasingOperaItems() != null) {
+			String purchasingOperaItems = StringConcatByArray.concatByArray(userInfoProfileDTO.getPurchasingOperaItems());
+			userInfoProfile.setPurchasingOperaItems(purchasingOperaItems);
+		}
+			
 		userInfoProfile.setReasonDeviceUse(userInfoProfileDTO.getReasonDeviceUse());
 		userInfoProfile.setViewer(userInfoProfileDTO.getViewer());
 		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());

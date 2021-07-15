@@ -34,29 +34,36 @@ public class UserInfoProfileCustomRepositoryImpl implements UserInfoProfileCusto
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getGender() != null) {
-	    	 queryString.append(" and uip.gender IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getGender().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getGender().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getGender().get(userInfoProfileCustomFilter.getGender().size()-1)+"'");
-	         
-	      queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getGender().isEmpty()) {
+	    		  queryString.append(" and uip.gender IN ( ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getGender().size()-1; indice++)
+		 	            queryString.append("'"+userInfoProfileCustomFilter.getGender().get(indice)+"',");
+		 	         	queryString.append("'"+userInfoProfileCustomFilter.getGender().get(userInfoProfileCustomFilter.getGender().size()-1)+"'");
+		 	         	queryString.append(") ");
+	    	  }
+	    	 
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getMaritalStatus() != null) {
-	    	  
-	    	 queryString.append(" and uip.marital_status IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getMaritalStatus().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getMaritalStatus().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getMaritalStatus().get(userInfoProfileCustomFilter.getMaritalStatus().size()-1)+"'");
-	         queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getMaritalStatus().isEmpty()) {
+	    		  queryString.append(" and uip.marital_status IN ( ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getMaritalStatus().size()-1; indice++)
+		 	            queryString.append("'"+userInfoProfileCustomFilter.getMaritalStatus().get(indice)+"',");
+		 	         	queryString.append("'"+userInfoProfileCustomFilter.getMaritalStatus().get(userInfoProfileCustomFilter.getMaritalStatus().size()-1)+"'");
+		 	         	queryString.append(") ");
+	    	  }
+	    	 
 	      }
 
 	      if(userInfoProfileCustomFilter.getEducation() != null) {
-	    	  queryString.append(" and uip.education IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getEducation().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getEducation().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getEducation().get(userInfoProfileCustomFilter.getEducation().size()-1)+"'");
-	         queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getEducation().isEmpty()) {
+	    		  queryString.append(" and uip.education IN ( ");
+	 	          for(int indice=0; indice < userInfoProfileCustomFilter.getEducation().size()-1; indice++)
+	 	        	  	queryString.append("'"+userInfoProfileCustomFilter.getEducation().get(indice)+"',");
+	 	          		queryString.append("'"+userInfoProfileCustomFilter.getEducation().get(userInfoProfileCustomFilter.getEducation().size()-1)+"'");
+	 	          		queryString.append(") ");
+	    	  }
+	    	  
 	      }
 	      
 	      if (userInfoProfileCustomFilter.getGeoLocation() != null) {
@@ -65,12 +72,13 @@ public class UserInfoProfileCustomRepositoryImpl implements UserInfoProfileCusto
 		      }
 	      
 	      if(userInfoProfileCustomFilter.getEmployment() != null) {
-	    	  queryString.append(" and uip.employment IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getEmployment().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getEmployment().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getEmployment().get(userInfoProfileCustomFilter.getEmployment().size()-1)+"'");
-		      queryString.append(") ");
-
+	    	  if(!userInfoProfileCustomFilter.getEmployment().isEmpty()) {
+	    		  queryString.append(" and uip.employment IN ( ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getEmployment().size()-1; indice++)
+			 	         queryString.append("'"+userInfoProfileCustomFilter.getEmployment().get(indice)+"',");
+			 	         queryString.append("'"+userInfoProfileCustomFilter.getEmployment().get(userInfoProfileCustomFilter.getEmployment().size()-1)+"'");
+			 		     queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if (userInfoProfileCustomFilter.getDeviceUse() != null) {
@@ -79,23 +87,26 @@ public class UserInfoProfileCustomRepositoryImpl implements UserInfoProfileCusto
 		      }
 	      
 	      if(userInfoProfileCustomFilter.getReasonDeviceUse() != null) {
-	    	  queryString.append(" and uip.reason_device_use IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getReasonDeviceUse().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getReasonDeviceUse().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getReasonDeviceUse().get(userInfoProfileCustomFilter.getReasonDeviceUse().size()-1)+"'");
-		     queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getReasonDeviceUse().isEmpty()) {
+	    		  queryString.append(" and uip.reason_device_use IN ( ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getReasonDeviceUse().size()-1; indice++)
+			 	         queryString.append("'"+userInfoProfileCustomFilter.getReasonDeviceUse().get(indice)+"',");
+			 	         queryString.append("'"+userInfoProfileCustomFilter.getReasonDeviceUse().get(userInfoProfileCustomFilter.getReasonDeviceUse().size()-1)+"'");
+			 		     queryString.append(") ");
+	    	  }
 
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getEventFrequency() != null) {
-	    	  queryString.append(" and uip.event_frequency IN ( ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getEventFrequency().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getEventFrequency().get(indice)+"',");
-	         queryString.append("'"+userInfoProfileCustomFilter.getEventFrequency().get(userInfoProfileCustomFilter.getEventFrequency().size()-1)+"'");
-	         queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getEventFrequency().isEmpty()) {
+	    		  queryString.append(" and uip.event_frequency IN ( ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getEventFrequency().size()-1; indice++)
+		 	            queryString.append("'"+userInfoProfileCustomFilter.getEventFrequency().get(indice)+"',");
+		 	         	queryString.append("'"+userInfoProfileCustomFilter.getEventFrequency().get(userInfoProfileCustomFilter.getEventFrequency().size()-1)+"'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
-	      
-	      
+
 	      if (userInfoProfileCustomFilter.getViewer() != null) {
 		         queryString.append(" and uip.viewer = ? ");
 		         parametri.add(userInfoProfileCustomFilter.getViewer());
@@ -107,57 +118,64 @@ public class UserInfoProfileCustomRepositoryImpl implements UserInfoProfileCusto
 		      }
 	      
 	      if(userInfoProfileCustomFilter.getCulturalInteresting() != null) {
-	    	  queryString.append(" and (uip.cultural_interesting LIKE ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getCulturalInteresting().size()-1; indice++)
-	            queryString.append("'%"+userInfoProfileCustomFilter.getCulturalInteresting().get(indice)+"%' OR uip.cultural_interesting LIKE ");
-	         queryString.append("'%"+userInfoProfileCustomFilter.getCulturalInteresting().get(userInfoProfileCustomFilter.getCulturalInteresting().size()-1)+"%'");
-		      queryString.append(") ");
-
+	    	  if(!userInfoProfileCustomFilter.getCulturalInteresting().isEmpty()) {
+	    		  queryString.append(" and (uip.cultural_interesting LIKE ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getCulturalInteresting().size()-1; indice++)
+		 	            queryString.append("'%"+userInfoProfileCustomFilter.getCulturalInteresting().get(indice)+"%' OR uip.cultural_interesting LIKE ");
+		 	         	queryString.append("'%"+userInfoProfileCustomFilter.getCulturalInteresting().get(userInfoProfileCustomFilter.getCulturalInteresting().size()-1)+"%'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getHobbies() != null) {
-		      queryString.append(" and (uip.hobby LIKE ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getHobbies().size()-1; indice++)
-	            queryString.append("'%"+userInfoProfileCustomFilter.getHobbies().get(indice)+"%' OR uip.hobby LIKE ");
-	         queryString.append("'%"+userInfoProfileCustomFilter.getHobbies().get(userInfoProfileCustomFilter.getHobbies().size()-1)+"%'");
-		      queryString.append(") ");
-
+	    	  if(!userInfoProfileCustomFilter.getHobbies().isEmpty()) {
+	    		  queryString.append(" and (uip.hobby LIKE ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getHobbies().size()-1; indice++)
+		 	            queryString.append("'%"+userInfoProfileCustomFilter.getHobbies().get(indice)+"%' OR uip.hobby LIKE ");
+		 	         	queryString.append("'%"+userInfoProfileCustomFilter.getHobbies().get(userInfoProfileCustomFilter.getHobbies().size()-1)+"%'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getLanguages() != null) {
-		      queryString.append(" and (uip.languages LIKE ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getLanguages().size()-1; indice++)
-	            queryString.append("'%"+userInfoProfileCustomFilter.getLanguages().get(indice)+"%' OR uip.languages LIKE ");
-	         queryString.append("'%"+userInfoProfileCustomFilter.getLanguages().get(userInfoProfileCustomFilter.getLanguages().size()-1)+"%'");
-		      queryString.append(") ");
+	    	  if(!userInfoProfileCustomFilter.getLanguages().isEmpty()) {
+	    		  queryString.append(" and (uip.languages LIKE ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getLanguages().size()-1; indice++)
+		 	            queryString.append("'%"+userInfoProfileCustomFilter.getLanguages().get(indice)+"%' OR uip.languages LIKE ");
+		 	         	queryString.append("'%"+userInfoProfileCustomFilter.getLanguages().get(userInfoProfileCustomFilter.getLanguages().size()-1)+"%'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getOperaType() != null) {
-		      queryString.append(" and (uip.opera_type LIKE ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getOperaType().size()-1; indice++)
-	            queryString.append("'%"+userInfoProfileCustomFilter.getOperaType().get(indice)+"%' OR uip.opera_type LIKE ");
-	         queryString.append("'%"+userInfoProfileCustomFilter.getOperaType().get(userInfoProfileCustomFilter.getOperaType().size()-1)+"%'");
-		      queryString.append(") ");
-
+	    	  if(!userInfoProfileCustomFilter.getOperaType().isEmpty()) {
+	    		  queryString.append(" and (uip.opera_type LIKE ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getOperaType().size()-1; indice++)
+		 	            queryString.append("'%"+userInfoProfileCustomFilter.getOperaType().get(indice)+"%' OR uip.opera_type LIKE ");
+		 	         	queryString.append("'%"+userInfoProfileCustomFilter.getOperaType().get(userInfoProfileCustomFilter.getOperaType().size()-1)+"%'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getPurchasingOperaItems() != null) {
-		      queryString.append(" and (uip.purchasing_opera_items LIKE ");
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getPurchasingOperaItems().size()-1; indice++)
-	            queryString.append("'%"+userInfoProfileCustomFilter.getPurchasingOperaItems().get(indice)+"%' OR uip.purchasing_opera_items LIKE ");
-	         queryString.append("'%"+userInfoProfileCustomFilter.getPurchasingOperaItems().get(userInfoProfileCustomFilter.getPurchasingOperaItems().size()-1)+"%'");
-		      queryString.append(") ");
-
+	    	  if(!userInfoProfileCustomFilter.getPurchasingOperaItems().isEmpty()) {
+	    		  queryString.append(" and (uip.purchasing_opera_items LIKE ");
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getPurchasingOperaItems().size()-1; indice++)
+		 	            queryString.append("'%"+userInfoProfileCustomFilter.getPurchasingOperaItems().get(indice)+"%' OR uip.purchasing_opera_items LIKE ");
+		 	         	queryString.append("'%"+userInfoProfileCustomFilter.getPurchasingOperaItems().get(userInfoProfileCustomFilter.getPurchasingOperaItems().size()-1)+"%'");
+		 	         	queryString.append(") ");
+	    	  }
 	      }
 	      
 	      if(userInfoProfileCustomFilter.getNotifications() != null) {
-		      queryString.append(" and n.id_notification_type in \r\n (select n.id_notification_type from public.notification n2 where n2.id_user_info_profile = uip.id_user_info_profile and n.description IN ( " );
-	         for(int indice=0; indice < userInfoProfileCustomFilter.getNotifications().size()-1; indice++)
-	            queryString.append("'"+userInfoProfileCustomFilter.getNotifications().get(indice)+"', ");
-	         queryString.append("'"+userInfoProfileCustomFilter.getNotifications().get(userInfoProfileCustomFilter.getNotifications().size()-1)+"'");
-	         queryString.append(") and n.enabled = true ");
-		      queryString.append(" group by n.id_user_info_profile )");
-		      
+	    	  if(!userInfoProfileCustomFilter.getNotifications().isEmpty()) {
+	    		  queryString.append(" and n.id_notification_type in \r\n (select n2.id_notification_type from public.notification n2 where n2.id_user_info_profile = uip.id_user_info_profile and lower(n2.description) IN ( " );
+	 	         for(int indice=0; indice < userInfoProfileCustomFilter.getNotifications().size()-1; indice++)
+		 	            queryString.append("'"+userInfoProfileCustomFilter.getNotifications().get(indice)+"', ");
+		 	         	queryString.append("'"+userInfoProfileCustomFilter.getNotifications().get(userInfoProfileCustomFilter.getNotifications().size()-1)+"'");
+		 	         	queryString.append(") and n.enabled = true ");
+		 	         	queryString.append(" group by n2.id_notification_type, n2.id_user_info_profile )");  
+	    	  }
 	      }
 	     
 	      queryString.append(" group by uip.id_user_info_profile ");
