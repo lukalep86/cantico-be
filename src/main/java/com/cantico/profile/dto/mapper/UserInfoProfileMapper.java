@@ -27,7 +27,11 @@ public class UserInfoProfileMapper {
 			userInfoProfileDTO.setIdUserInfoProfile(userInfoProfile.getIdUserInfoProfile());
 		}
 		
-		userInfoProfileDTO.setCommunityAttendance(userInfoProfile.getCommunityAttendance());
+		if(userInfoProfile.getCommunityAttendance() == null) {
+			userInfoProfileDTO.setCommunityAttendance(false);
+		}else {
+			userInfoProfileDTO.setCommunityAttendance(userInfoProfile.getCommunityAttendance());
+		}
 		
 		List<String> culturalInterestingList = new ArrayList<>();
 		if(userInfoProfile.getCulturalInteresting() != null) {
@@ -37,7 +41,12 @@ public class UserInfoProfileMapper {
 		
 		userInfoProfileDTO.setAge(userInfoProfile.getAge());
 		userInfoProfileDTO.setDateInsert(userInfoProfile.getDateInsert());
-		userInfoProfileDTO.setDeviceUse(userInfoProfile.getDeviceUse());
+		if(userInfoProfile.getDeviceUse() == null) {
+			userInfoProfileDTO.setDeviceUse(false);
+		}else {
+			userInfoProfileDTO.setDeviceUse(userInfoProfile.getDeviceUse());
+
+		}
 		userInfoProfileDTO.setEducation(userInfoProfile.getEducation());
 		userInfoProfileDTO.setEmployment(userInfoProfile.getEmployment());
 		userInfoProfileDTO.setEventFrequency(userInfoProfile.getEventFrequency());
@@ -58,7 +67,12 @@ public class UserInfoProfileMapper {
 		}
 		userInfoProfileDTO.setIdUser(userInfoProfile.getUserAnagrafica().getId());
 		userInfoProfileDTO.setMaritalStatus(userInfoProfile.getMaritalStatus());
-		userInfoProfileDTO.setNotificationRecieved(userInfoProfile.getNotificationRecieved());
+		
+		if(userInfoProfile.getNotificationRecieved() == null) {
+			userInfoProfileDTO.setNotificationRecieved(false);
+		}else {
+			userInfoProfileDTO.setNotificationRecieved(userInfoProfile.getNotificationRecieved());
+		}
 		
 		List<String> operaTypeList = new ArrayList<>();
 		if(userInfoProfile.getOperaType() != null) {
@@ -107,7 +121,12 @@ public class UserInfoProfileMapper {
 		}
 		
 		userInfoProfile.setAge(userInfoProfileDTO.getAge());
-		userInfoProfile.setCommunityAttendance(userInfoProfileDTO.getCommunityAttendance());
+		
+		if(userInfoProfileDTO.getCommunityAttendance() == null) {
+			userInfoProfile.setCommunityAttendance(false);
+		}else {
+			userInfoProfile.setCommunityAttendance(userInfoProfileDTO.getCommunityAttendance());
+		}
 		
 		if(userInfoProfileDTO.getCulturalInteresting() != null) {
 			String culturalInteresting = StringConcatByArray.concatByArray(userInfoProfileDTO.getCulturalInteresting());
@@ -115,7 +134,13 @@ public class UserInfoProfileMapper {
 		}
 		
 		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
-		userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
+		
+		if(userInfoProfileDTO.getDeviceUse() == null) {
+			userInfoProfile.setDeviceUse(false);
+		}else {
+			userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
+		}
+		
 		userInfoProfile.setEducation(userInfoProfileDTO.getEducation());
 		userInfoProfile.setEmployment(userInfoProfileDTO.getEmployment());
 		userInfoProfile.setEventFrequency(userInfoProfileDTO.getEventFrequency());
@@ -134,7 +159,12 @@ public class UserInfoProfileMapper {
 		}
 		
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
-		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
+		
+		if(userInfoProfileDTO.getNotificationRecieved() == null) {
+			userInfoProfile.setNotificationRecieved(false);
+		}else {
+			userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
+		}
 		
 		if(userInfoProfileDTO.getOperaType() != null) {
 			String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
@@ -169,7 +199,13 @@ public class UserInfoProfileMapper {
 		
 		userInfoProfile.setAge(userInfoProfileDTO.getAge());
 		userInfoProfile.setDateInsert(userInfoProfileDTO.getDateInsert());
-		userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
+		
+		if(userInfoProfileDTO.getDeviceUse() == null) {
+			userInfoProfile.setDeviceUse(false);
+		}else {
+			userInfoProfile.setDeviceUse(userInfoProfileDTO.getDeviceUse());
+		}		
+		
 		userInfoProfile.setEducation(userInfoProfileDTO.getEducation());
 		userInfoProfile.setEmployment(userInfoProfileDTO.getEmployment());
 		userInfoProfile.setEventFrequency(userInfoProfileDTO.getEventFrequency());
@@ -188,7 +224,12 @@ public class UserInfoProfileMapper {
 		}
 		
 		userInfoProfile.setMaritalStatus(userInfoProfileDTO.getMaritalStatus());
-		userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
+		
+		if(userInfoProfileDTO.getNotificationRecieved() == null) {
+			userInfoProfile.setNotificationRecieved(false);
+		}else {
+			userInfoProfile.setNotificationRecieved(userInfoProfileDTO.getNotificationRecieved());
+		}
 		
 		if(userInfoProfileDTO.getOperaType() != null) {
 			String operaType = StringConcatByArray.concatByArray(userInfoProfileDTO.getOperaType());
@@ -198,6 +239,12 @@ public class UserInfoProfileMapper {
 		if(userInfoProfileDTO.getPurchasingOperaItems() != null) {
 			String purchasingOperaItems = StringConcatByArray.concatByArray(userInfoProfileDTO.getPurchasingOperaItems());
 			userInfoProfile.setPurchasingOperaItems(purchasingOperaItems);
+		}
+		
+		if(userInfoProfileDTO.getCommunityAttendance() == null) {
+			userInfoProfile.setCommunityAttendance(false);
+		}else {
+			userInfoProfile.setCommunityAttendance(userInfoProfileDTO.getCommunityAttendance());
 		}
 			
 		userInfoProfile.setReasonDeviceUse(userInfoProfileDTO.getReasonDeviceUse());

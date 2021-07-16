@@ -122,7 +122,11 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 					Notification notificationCreate = new Notification();
 					notificationCreate.setDescription(notification.getDescription());
 					notificationCreate.setUserInfoProfile(newUserInfoProfile);
-					notificationCreate.setEnabled(notification.getEnabled());
+					if(notification.getEnabled() == null) {
+						notificationCreate.setEnabled(false);
+					}else {
+						notificationCreate.setEnabled(notification.getEnabled());
+					}
 					notificationList.add(notificationCreate);
 				}
 				notificationRepository.saveAll(notificationList);
@@ -194,49 +198,56 @@ public class UserInfoProfileServiceImpl implements UserInfoProfileService{
 					List<Notification> notificationList = notificationRepository.findByUserInfoProfile(userInfoProfile);
 					if(!notificationList.isEmpty()) {
 						for(Notification notification : notificationList) {
-							if(notification.getDescription().equalsIgnoreCase("EMAIL") && notification.getEnabled() == true) {
-								 MimeMessage message = mailSender.createMimeMessage();              
-									MimeMessageHelper helper = new MimeMessageHelper(message);
-									try{		
-											helper.setFrom("canticoprofile@gmail.com", "CANTICO");
-											helper.setTo(email);
-											
-											String subject = "Notifica Invito Evento";
-															
-											helper.setSubject(subject);
-											
-											helper.setText(sendCustomNotification.getContent(), true);
-											
-											mailSender.send(message);
-									} catch (MessagingException e) {
-									
-										logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail ", e.getCause());
-										throw new MailAuthenticationException("Tentativo di connessione al server Gmail come provider SMTP: il tentativo di accesso è stato impedito");
-							            
-							        } 
-									catch (Exception e) {
-										logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail  ", e.getCause());
-										throw new MailAuthenticationException("Tentativo di connessione al server Gmail come provider SMTP: il tentativo di accesso è stato impedito");
-							        }
-									
-									sendCustomNotification.setEmail(true);
-							}
-							if(notification.getDescription().equalsIgnoreCase("SMS") && notification.getEnabled() == true) {
-								// implements sms notify
-								sendCustomNotification.setSms(true);
-							}
-							if(notification.getDescription().equalsIgnoreCase("PUSH") && notification.getEnabled() == true) {
-								
-								PushNotify pushNotify = new PushNotify();
-								pushNotify.setUserInfoProfile(userInfoProfile);
-								pushNotify.setContent(sendCustomNotification.getContent());
-								pushNotify.setChecked(false);
-								pushNotify.setDateInsert(new Date());
-								pushNotifyRepository.save(pushNotify);
-								
-								sendCustomNotification.setPush(true);
+							if(notification.getDescription().equalsIgnoreCase("EMAIL") && notification.getEnabled() != null) {
+								if(notification.getDescription().equalsIgnoreCase("EMAIL") && notification.getEnabled() == true) {
+									 MimeMessage message = mailSender.createMimeMessage();              
+										MimeMessageHelper helper = new MimeMessageHelper(message);
+										try{		
+												helper.setFrom("canticoprofile@gmail.com", "CANTICO");
+												helper.setTo(email);
+												
+												String subject = "Notifica Invito Evento";
+																
+												helper.setSubject(subject);
+												
+												helper.setText(sendCustomNotification.getContent(), true);
+												
+												mailSender.send(message);
+										} catch (MessagingException e) {
+										
+											logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail ", e.getCause());
+											throw new MailAuthenticationException("Tentativo di connessione al server Gmail come provider SMTP: il tentativo di accesso è stato impedito");
+								            
+								        } 
+										catch (Exception e) {
+											logger.debug("SENDTOEMAIL Errore durante la connessione all'account e-mail  ", e.getCause());
+											throw new MailAuthenticationException("Tentativo di connessione al server Gmail come provider SMTP: il tentativo di accesso è stato impedito");
+								        }
+										
+										sendCustomNotification.setEmail(true);
+								}
 							}
 							
+							if(notification.getDescription().equalsIgnoreCase("SMS") && notification.getEnabled() != null) {
+								if(notification.getDescription().equalsIgnoreCase("SMS") && notification.getEnabled() == true) {
+									// implements sms notify
+									sendCustomNotification.setSms(true);
+								}
+							}
+							
+							if(notification.getDescription().equalsIgnoreCase("PUSH") && notification.getEnabled() != null) {
+								if(notification.getDescription().equalsIgnoreCase("PUSH") && notification.getEnabled() == true) {
+									
+									PushNotify pushNotify = new PushNotify();
+									pushNotify.setUserInfoProfile(userInfoProfile);
+									pushNotify.setContent(sendCustomNotification.getContent());
+									pushNotify.setChecked(false);
+									pushNotify.setDateInsert(new Date());
+									pushNotifyRepository.save(pushNotify);
+									
+									sendCustomNotification.setPush(true);
+								}
+							}
 							userInfoProfile.setNotificationRecieved(true);
 							userInfoProfile.setDateNotificationRecieved(new Date());
 							/*String date = sendCustomNotification.getEventDate().plusDays(10).toString();
