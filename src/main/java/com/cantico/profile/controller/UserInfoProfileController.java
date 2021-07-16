@@ -89,7 +89,7 @@ public class UserInfoProfileController {
 		
 		logger.info("init method in UserInfoProfileController: getUserInfoProfileList");
 
-		//NB: nel caso in cui viene utilizzato il Jwt, decommentare la string sottostanste e togliere il "@PathVariable("email") String email"
+		//NB: utilizzando il Jwt, decommentare la string sottostanste e togliere il "@PathVariable("email") String email"
 		//		oltre a togliere {email} dal path
 		//String email = jwtExtractEmail.getPropertyFromToken(jwt, "email");
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
@@ -139,7 +139,7 @@ public class UserInfoProfileController {
 					throw new RuntimeException(String.format("Utenti non trovati!", e.getMessage()));
 		}*/
 		
-		userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter);
+		userInfoProfileList = userInfoProfileService.getUserFilterByAdmin(userInfoProfileCustomFilter); //DECOMMENTARE QUANDO UTILZZA IL JWT
 		logger.info("end method in UserInfoProfileController: getUserInfoProfileList");
 		return new ResponseEntity<List<UserInfoProfileDTO>>(userInfoProfileList, HttpStatus.OK);
 		
