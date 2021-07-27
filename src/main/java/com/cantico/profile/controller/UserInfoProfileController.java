@@ -63,6 +63,8 @@ public class UserInfoProfileController {
 				AnagraficaClientCustom body = anagraficaResponse.getBody();
 				if (body.getEmail() != null) {
 					userInfoProfile = userInfoProfileService.createUpdateUserInfoProfile(userInfoProfileDTO, body.getId());
+				}else {
+					throw new UsernameNotFoundException("Utente non registrato in piattaforma");
 				}
 			} else {
 				throw new RuntimeException(
@@ -101,7 +103,10 @@ public class UserInfoProfileController {
 				}else {
 					throw new UsernameNotFoundException("Utente " + email + " non registrato in piattaforma");
 				}
-			} 
+			} else {
+				throw new RuntimeException(
+						String.format("findAnagraficaByEmail status: ", anagraficaResponse.getStatusCode().toString()));
+			}
 
 		}catch(FeignException e) {
 			logger.error(
