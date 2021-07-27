@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,17 +51,14 @@ public class UserInfoProfileController {
 	
 	
 	@PutMapping("/profile")
-	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(@RequestBody @Valid UserInfoProfileDTO userInfoProfileDTO, 
-			@RequestHeader(required = false, name = "authorization") String jwt){
+	public ResponseEntity<UserInfoProfileDTO> createUpdateUserInfoProfile(@RequestBody @Valid UserInfoProfileDTO userInfoProfileDTO){
 		
 		logger.info("init method in UserInfoProfileController: createUpdateUserInfoProfile");
 		
-		//String email = jwtExtractEmail.getPropertyFromToken(jwt, "email"); //DECOMMENTATE QUANDO SI USA IL JWT AUTH
 		ResponseEntity<AnagraficaClientCustom> anagraficaResponse = null;
 		UserInfoProfileDTO userInfoProfile = new UserInfoProfileDTO();
 		try {
-			//anagraficaResponse = anagraficaClient.findAnagrafica(email);  DECOMMENTARE QUANDO SI USA IL JWT AUTH
-			anagraficaResponse = anagraficaClient.findAnagrafica(userInfoProfileDTO.getEmail()); //COMMENTARE QUANDO SI USA IL JWT
+			anagraficaResponse = anagraficaClient.findAnagrafica(userInfoProfileDTO.getEmail());
 			if (anagraficaResponse.getStatusCode().equals(HttpStatus.OK)) {
 				AnagraficaClientCustom body = anagraficaResponse.getBody();
 				if (body.getEmail() != null) {
@@ -100,6 +98,8 @@ public class UserInfoProfileController {
 				AnagraficaClientCustom body = anagraficaResponse.getBody();
 				if (body.getEmail() != null) {
 					userInfoProfile = userInfoProfileService.getUserInfoProfileByUserAnagrafica(anagraficaResponse.getBody());
+				}else {
+					throw new UsernameNotFoundException("Utente " + email + " non registrato in piattaforma");
 				}
 			} 
 
