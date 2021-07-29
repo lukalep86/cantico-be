@@ -7,7 +7,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: eai/cantico-profile-be
+        image: cantico-profile-be
         ports:
             - "${BE_PORT}:8080"
         env_file:
